@@ -20,7 +20,7 @@
         <action name="login" class="com.ysw.craft.action.LoginAction">
 			<result name="ok">/a.jsp</result>
 			<result name="error">/a.jsp</result>
-			<result name="input">/a.jsp</result>
+			<result name="input">/first.jsp</result>
         </action>
     </package>
 </struts>
