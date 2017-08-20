@@ -18,7 +18,7 @@
 				document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
 			}
 		}
-		xmlhttp.open("POST", "login", true);
+		xmlhttp.open("POST", "a.jsp", true);
 		//xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		xmlhttp.send("userName=yas123&password=123456");
 		
