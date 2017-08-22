@@ -27,9 +27,9 @@ body {
 	<div id="all">
 		<h4>二院欢迎你！</h4>
 		<img src="../../images/1.jpg" width="400px" alt="高跟" /><br/>
-		<img src="../../images/rondo.gif" width="400px" alt="高跟" />
+		<img src="../../images/rondo.gif" width="400px" alt="隆多" />
 		<br /> 
-		高跟
+		我${empty applicationScope.num?0:applicationScope.num}个数
 		<s:include value="/pages/common/bottom.jsp"></s:include>
 	</div>
 </body>

@@ -66,4 +66,5 @@ public class LoginAction extends ActionSupport implements ServletRequestAware{
 			System.out.println("密码为空了或者密码长度小于3了！");
 		}
 	}
+	
 }

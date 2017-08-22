@@ -15,6 +15,13 @@
 			<result name="ok">/a.jsp</result>
 			<result name="error">/a.jsp</result>
 			<result name="input">/login.jsp</result>
+			
+		</action>
+		<action name="second" class="com.ysw.craft.action.SecondAction">
+			<result name="sec">/pages/test/second.jsp</result>
+			<result name="error">/a.jsp</result>
+			<result name="input">/login.jsp</result>
+			
 		</action>
 	</package>
 </struts>
