@@ -25,18 +25,30 @@
 	}
 </script>
 <title>ajax</title>
+<style type="text/css">
+#all {
+	background-color: #D0D0D0;
+	width: 800px;
+	margin: 0 auto;
+	top: 200px;
+}
+</style>
 </head>
 <body>
+<div id="all">
 	<h2>AJAX</h2>
 	<button type="button" onclick="loadXMLDoc()">请求数据</button>
 	<div id="myDiv"></div>
+	<div id="loginDiv">
 	<form action="login" method="post">
-		用户名<input type="text" name="userName"/>
-		密码<input type="password" name="password"/>
+		用户名<input type="text" name="userName"/><br/>
+		密码<input type="password" name="password"/><br/>
 		<input type="submit" value="提交"/>
 	</form>
+	</div>
 	<s:fielderror/>
 	<s:include value="/pages/common/bottom.jsp"></s:include>
+</div>
 </body>
 </html>
 

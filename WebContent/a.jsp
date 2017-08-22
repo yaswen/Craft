@@ -25,10 +25,12 @@
 		<div id="top" name="top" align="right">登录用户：${session.CurUser}</div>
 		<div align="center">
 			<h3 align="center">登高</h3>
-			风急天高猿啸哀，渚清沙白鸟飞回。<br /> 无边落木萧萧下，不尽长江滚滚来。<br /> 万里悲秋常作客，百年多病独登台。<br />
-			艰难苦恨繁霜鬓，潦倒新停浊酒杯。<br /> <a href="first.jsp">返回首页</a> <a
-				href="pages/test/second.jsp">进入二院</a>
-		
+			风急天高猿啸哀，渚清沙白鸟飞回。<br /> 
+			无边落木萧萧下，不尽长江滚滚来。<br /> 
+			万里悲秋常作客，百年多病独登台。<br />
+			艰难苦恨繁霜鬓，潦倒新停浊酒杯。<br /> 
+			<a href="first.jsp">返回首页</a> 
+			<a href="pages/test/second.jsp">进入二院</a>
 		</div>
 		<s:include value="/pages/common/bottom.jsp"></s:include>
 </body>
