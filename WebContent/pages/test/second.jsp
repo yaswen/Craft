@@ -29,7 +29,7 @@ body {
 		<img src="../../images/1.jpg" width="400px" alt="高跟" /><br/>
 		<img src="../../images/rondo.gif" width="400px" alt="隆多" />
 		<br /> 
-		我${empty applicationScope.num?0:applicationScope.num}个数
+		我进了${empty applicationScope.num?0:applicationScope.num}次二院
 		<s:include value="/pages/common/bottom.jsp"></s:include>
 	</div>
 </body>

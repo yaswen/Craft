@@ -20,7 +20,7 @@ function loadXMLDoc() {
 	}
 	xmlhttp.open("POST", "login.action", true);
 	//xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xmlhttp.send("userName=yas123&password=123456");
+	xmlhttp.send("{userName:'yas123',password:'123456'}");
 	
 }
 	function loadXMLDoc0() {
@@ -37,7 +37,7 @@ function loadXMLDoc() {
 		}
 		xmlhttp.open("POST", "second.action", true);//get不行。
 		//xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-		xmlhttp.send("");//send里面可以为空，不传参数，但是一定要有send。此行注释不行。
+		xmlhttp.send();//send里面可以为空，不传参数，但是一定要有send。此行注释不行。
 		
 	}
 	function loadXMLDoc1() {
@@ -54,7 +54,7 @@ function loadXMLDoc() {
 		}
 		xmlhttp.open("POST", "second!sec.action", true);
 		//xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-		xmlhttp.send("");
+		xmlhttp.send();
 	}
 </script>
 <title>ajax</title>
