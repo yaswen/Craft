@@ -10,7 +10,5 @@ public class UserDemo {
 		i+=10;
 		user.setGold(i);
 		UserDao.updateUser(user);
-//		User user2=new User("atu",10,100);
-//		UserDao.addUser(user2);
 	}
 }
