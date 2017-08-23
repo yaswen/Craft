@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ysw.craft.pojos">
+	<class name="User" table="TBUSERS">
+		<!-- 主键 -->
+		<id name="id" column="ID">
+			<generator class="native"/>
+		</id>
+		<!-- 用户名 -->
+		<property name="userName" column="USERNAME" type="string" not-null="true"/>
+		<!-- 金钱 -->
+		<property name="gold" column="GOLD" type="java.lang.Integer" not-null="true"/>
+		<!-- 战斗力 -->
+		<property name="power" column="POWER" type="java.lang.Integer" not-null="true"/>
+		
+	</class>
+</hibernate-mapping>
