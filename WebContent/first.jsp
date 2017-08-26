@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="JS/jquery-1.7.2.min.js"></script>
 <script type="text/javascript">
 function loadXMLDoc() {
 	var xmlhttp;
@@ -20,7 +21,7 @@ function loadXMLDoc() {
 	}
 	xmlhttp.open("POST", "login.action", true);
 	//xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xmlhttp.send("{userName:'yas123',password:'123456'}");
+	xmlhttp.send('{userName:"yas123";password:"123456"}');
 	
 }
 	function loadXMLDoc0() {
@@ -56,6 +57,19 @@ function loadXMLDoc() {
 		//xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		xmlhttp.send();
 	}
+	function testAjax() {
+	    var userName = "shiwen";
+	    $.ajax({
+	        url : "second!ajaxtest.action",
+	        type : "GET",
+	        data : "userName=" + userName,
+	        success : function(data, textStatus) {
+	        	
+					document.getElementById("myDiv").innerHTML = data;
+				
+	        }
+	    });
+	}
 </script>
 <title>ajax</title>
 <style type="text/css">
@@ -71,6 +85,7 @@ function loadXMLDoc() {
 <div id="all">
 	<h2>AJAX</h2>
 	<button type="button" onclick="loadXMLDoc()">登录yas123</button>
+	<button type="button" onclick="testAjax()">欢迎shiwen</button>
 	<br>
 	<button type="button" onclick="loadXMLDoc0()">次数+1</button>
 	<button type="button" onclick="loadXMLDoc1()">次数-1</button>

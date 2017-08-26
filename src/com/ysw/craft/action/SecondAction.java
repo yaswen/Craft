@@ -1,8 +1,13 @@
 package com.ysw.craft.action;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -59,5 +64,16 @@ public class SecondAction extends ActionSupport{
 		}
 		ctx.getApplication().put("num", num);
 		return "sec";
+	}
+	public void ajaxtest() throws IOException{
+		
+		
+
+	        HttpServletResponse response = ServletActionContext.getResponse();
+	        PrintWriter writer = response.getWriter();
+	        writer.print("hello " + userName);
+	        writer.flush();
+	        writer.close();
+	    
 	}
 	}
