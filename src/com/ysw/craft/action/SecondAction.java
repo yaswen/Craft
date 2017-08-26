@@ -66,14 +66,12 @@ public class SecondAction extends ActionSupport{
 		return "sec";
 	}
 	public void ajaxtest() throws IOException{
-		
-		
-
-	        HttpServletResponse response = ServletActionContext.getResponse();
+			HttpServletResponse response = ServletActionContext.getResponse();
 	        PrintWriter writer = response.getWriter();
-	        writer.print("hello " + userName);
+	        writer.println("hello " + userName);
+	        writer.println("<table border='1'><tr><td>s</td><td>a</td></tr></table>");
 	        writer.flush();
 	        writer.close();
-	    
 	}
+	public void 
 	}
