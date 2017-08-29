@@ -8,14 +8,41 @@
 <title>君の名は</title>
 <script type="text/javascript">
 	function loadInfo() {
-		alert('1')
 		$("#info").load("loadInfo");
 	}
+	function testAjax() {
+	    var userName = $("#name").val();//获取id是name的输入框的值
+	    $.ajax({
+	        url : "second!ajaxtest.action",
+	        type : "GET",
+	        data : "userName=" + userName,
+	        success : function(data, textStatus) {
+					document.getElementById("info").innerHTML = data;
+				
+	        }
+	    });
+	}
+	function testAjax1(){
+		var userName="shiwen";
+		$.ajax({
+			url:"second!ajaxtest2.action",
+			type:"GET",
+			data:"userName="+userName,
+			success:function(data,testStatus){
+				var obj = eval(json_str);
+				document.getElementById("attack").innerHTML = data;
+			}
+		})
+	}
+	var obj = eval(json_str);
 </script>
 </head>
 <body>
-	<input type="button" value="获取" id="Get" onclick="loadInfo()" />
-	<div id="info"></div>
+	<input type="text" id="name" value="请输入姓名" label="用户名"/>
+	<input type="button" value="获取" id="Get" onclick="testAjax1()" />
+	<div id="info">
+	<p id="attack"></p>
+	</div>
 </body>
 
 </html>

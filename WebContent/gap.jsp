@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@taglib uri="/struts-tags" prefix="s"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>勇闯天涯</title>
 <script type="text/javascript" src="JS/jquery-1.7.2.min.js"></script>
 <script type="text/javascript">
 function loadXMLDoc() {
@@ -69,36 +69,17 @@ function loadXMLDoc() {
 	        }
 	    });
 	}
+	function buy() {
+		$("#ga").load("ga!buy.action");
+	}
+	function sale() {
+		$("#ga").load("ga!sale.action");
+	}
 </script>
-<title>ajax</title>
-<style type="text/css">
-#all {
-	background-color: #D0D0D0;
-	width: 800px;
-	margin: 0 auto;
-	top: 200px;
-}
-</style>
 </head>
 <body>
-<div id="all">
-	<h2>AJAX</h2>
-	<button type="button" onclick="loadXMLDoc()">登录yas123</button>
-	<button type="button" onclick="testAjax()">欢迎shiwen</button>
-	<br>
-	<button type="button" onclick="loadXMLDoc0()">次数+1</button>
-	<button type="button" onclick="loadXMLDoc1()">次数-1</button>
-	<div id="myDiv"></div>
-	<div id="loginDiv">
-	<form action="login" method="post">
-		用户名<input type="text" name="userName"/><br/>
-		密码<input type="password" name="password"/><br/>
-		<input type="submit" value="提交"/>
-	</form>
-	</div>
-	<s:fielderror/>
-	<s:include value="/pages/common/bottom.jsp"></s:include>
-</div>
+	<button onclick="buy()">买武装</button>
+	<button onclick="sale()">卖武装</button>
+	<div id="ga"></div>
 </body>
 </html>
-

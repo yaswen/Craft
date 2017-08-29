@@ -13,7 +13,7 @@
 			对应的类的路径 method: 调用Action中的方法名 -->
 
 		<action name="login" class="com.ysw.craft.action.LoginAction">
-			<result name="ok">/a.jsp</result>
+			<result name="ok">/gap.jsp</result>
 			<result name="error">/a.jsp</result>
 			<result name="input">/login.jsp</result>
 			
@@ -22,9 +22,11 @@
 			<result name="sec">/pages/test/second.jsp</result>
 			<result name="error">/a.jsp</result>
 			<result name="input">/login.jsp</result>
-			
+			<result name="nu"></result>
 		</action>
-		
+		<action name="ga" class="com.ysw.craft.action.GaAction">
+			<result name="success">/ga.jsp</result>
+		</action>
 	</package>
 	<!-- json-plugin返回json格式的一次尝试，但是未果。先注释掉放在这
 	<package name="ajaxDemo" extends="json-default" namespace="/" >

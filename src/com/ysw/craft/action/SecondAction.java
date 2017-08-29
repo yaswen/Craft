@@ -67,10 +67,25 @@ public class SecondAction extends ActionSupport{
 	}
 	public void ajaxtest() throws IOException{
 			HttpServletResponse response = ServletActionContext.getResponse();
+			//这句话的意思，是让浏览器用utf8来解析返回的数据  
+			//response.setHeader("Content-type", "text/html;charset=UTF-8");  
+			//这句话的意思，是告诉servlet用UTF-8转码，而不是用默认的ISO8859  
+			response.setCharacterEncoding("UTF-8");
 	        PrintWriter writer = response.getWriter();
 	        writer.println("hello " + userName);
 	        writer.println("<table border='1'><tr><td>s</td><td>a</td></tr></table>");
 	        writer.flush();
 	        writer.close();
 	}
+	public void ajaxtest2() throws IOException{
+		HttpServletResponse response = ServletActionContext.getResponse();
+		//这句话的意思，是让浏览器用utf8来解析返回的数据  
+		//response.setHeader("Content-type", "text/html;charset=UTF-8");  
+		//这句话的意思，是告诉servlet用UTF-8转码，而不是用默认的ISO8859  
+		response.setCharacterEncoding("UTF-8");
+        PrintWriter writer = response.getWriter();
+        writer.println("3");
+        writer.flush();
+        writer.close();
+}
 }
