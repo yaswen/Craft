@@ -21,7 +21,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ojdbc6.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/struts2-core-2.3.4.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/xwork-core-2.3.4.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/JS/jquery-1.7.2.min.js"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Struts2-json-plugin"/>
+	<classpathentry kind="lib" path="E:/java学习文件夹/User library/json-lib-2.3-jdk15.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

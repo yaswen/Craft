@@ -1,6 +1,13 @@
 package com.ysw.craft.pojos;
 
 public class Comment {
+	private int id;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	private String nickname;
 	private String content;
 	public String getNickname() {

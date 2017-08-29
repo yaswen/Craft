@@ -73,5 +73,4 @@ public class SecondAction extends ActionSupport{
 	        writer.flush();
 	        writer.close();
 	}
-	public void 
-	}
+}
