@@ -57,22 +57,34 @@ function loadXMLDoc() {
 		//xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		xmlhttp.send();
 	}
-	function testAjax() {
-	    var userName = "shiwen";
+	function buy() {
+	    var userName = '<%=session.getAttribute("CurUser")%>';
 	    $.ajax({
-	        url : "second!ajaxtest.action",
+	        url : "ga!buy.action",
 	        type : "GET",
 	        data : "userName=" + userName,
 	        success : function(data, textStatus) {
-					document.getElementById("myDiv").innerHTML = data;
+					document.getElementById("ga").innerHTML = data;
 				
 	        }
 	    });
 	}
-	function buy() {
+	function sale() {
+	    var userName = '<%=session.getAttribute("CurUser")%>';
+	    $.ajax({
+	        url : "ga!sale.action",
+	        type : "GET",
+	        data : "userName=" + userName,
+	        success : function(data, textStatus) {
+					document.getElementById("ga").innerHTML = data;
+				
+	        }
+	    });
+	}
+	function buy2() {
 		$("#ga").load("ga!buy.action");
 	}
-	function sale() {
+	function sale2() {
 		$("#ga").load("ga!sale.action");
 	}
 </script>

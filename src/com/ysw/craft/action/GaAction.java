@@ -51,17 +51,31 @@ public class GaAction {
 	public void setServletRequest(HttpServletRequest request){
 		this.request=request;
 	}
+	public String execute(){
+		ActionContext ctx =ActionContext.getContext();
+		Integer num=(Integer)ctx.getApplication().get("num");
+		if(num==null){
+			num=1;
+		}else{
+			num++;
+		}
+		ctx.getApplication().put("num", num);
+		return "success";
+	}
 	//买武装
 	public String buy(){
 		User user=UserDao.getUserByUserName(userName);
-		Integer gold=user.getGold();
-		Integer power=user.getPower();
+		gold=user.getGold();
+		power=user.getPower();
 		System.out.println("buy");
-		gold-=10;
+		gold-=20;
 		power+=10;
 		
 		
 		ActionContext ctx =ActionContext.getContext();
+		user.setGold(gold);
+		user.setPower(power);
+		UserDao.updateUser(user);
 		
 		ctx.getApplication().put("gold", gold);
 		ctx.getApplication().put("power", power);
@@ -69,15 +83,21 @@ public class GaAction {
 	}
 	//卖武装
 	public String sale(){
+		User user2=new User("shiwen",100,10);
 		User user=UserDao.getUserByUserName(userName);
-		Integer gold=user.getGold();
-		Integer power=user.getPower();
-		System.out.println("sale");
-		gold-=10;
-		power+=10;
-		
+		System.out.println("getuser");
+		gold=user.getGold();
+		power=user.getPower();
+		System.out.println("getgoldpower");
+		gold+=10;
+		power-=10;
+		System.out.println(gold);
+		System.out.println(power);
 		
 		ActionContext ctx =ActionContext.getContext();
+		user.setGold(gold);
+		user.setPower(power);
+		UserDao.updateUser(user);
 		
 		ctx.getApplication().put("gold", gold);
 		ctx.getApplication().put("power", power);

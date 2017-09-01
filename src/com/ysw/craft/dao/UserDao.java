@@ -1,6 +1,6 @@
 package com.ysw.craft.dao;
 
-
+import org.hibernate.boot.registry.*;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -25,9 +25,10 @@ public class UserDao {
 	}
 	//*根据userName获取客户*/
 		public static User getUserByUserName(String userName){
-			
+			System.out.println("getuserbyusername:"+userName);
 				Session session=HibernateUtils.getSession();
 				String hql="from User c where c.userName = :name";
+				System.out.println(hql);
 				User user=(User)session.createQuery(hql)
 						.setString("name", userName)
 						.setMaxResults(1)
