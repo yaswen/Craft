@@ -5,9 +5,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ga</title>
+<style type="text/css">
+#all {
+	background-color: #EECCAA;
+	width: 800px;
+	margin: 0 auto;
+	top: 200px;
+}
+</style>
 </head>
 <body>
-	<div>
+	<div id="all">
 		<table border="1">
 		<tr>
 			<td>用户名</td><td>金钱</td><td>攻击力</td>

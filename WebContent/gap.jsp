@@ -16,7 +16,6 @@
 	        data : "userName=" + userName,
 	        success : function(data, textStatus) {
 					document.getElementById("ga").innerHTML = data;
-				
 	        }
 	    });
 	}
@@ -28,16 +27,26 @@
 	        data : "userName=" + userName,
 	        success : function(data, textStatus) {
 					document.getElementById("ga").innerHTML = data;
-				
 	        }
 	    });
 	}
 	
 </script>
+<style type="text/css">
+#all {
+	background-color: #EEDDCC;
+	width: 800px;
+	margin: 0 auto;
+	top: 200px;
+}
+</style>
 </head>
 <body>
-	<button onclick="buy()">买武装</button>
-	<button onclick="sale()">卖武装</button>
-	<div id="ga"></div>
+	<div id="all">
+		<h3>买卖武装，勇闯天涯</h3>
+		<button onclick="buy()">买武装</button>
+		<button onclick="sale()">卖武装</button>
+		<div id="ga"></div>
+	</div>
 </body>
 </html>
