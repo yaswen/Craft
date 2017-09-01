@@ -57,6 +57,7 @@ function loadXMLDoc() {
 		//xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		xmlhttp.send();
 	}
+	//常用的ajax方法：
 	function testAjax() {
 	    var userName = "shiwen";
 	    $.ajax({

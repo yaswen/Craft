@@ -9,6 +9,7 @@
 <script type="text/javascript">
 
 	function buy() {
+		document.getElementById("ga").innerHTML = "计算中。。。";
 	    var userName = '<%=session.getAttribute("CurUser")%>';
 	    $.ajax({
 	        url : "ga!buy.action",
@@ -20,6 +21,7 @@
 	    });
 	}
 	function sale() {
+		document.getElementById("ga").innerHTML = "计算中。。。";
 	    var userName = '<%=session.getAttribute("CurUser")%>';
 	    $.ajax({
 	        url : "ga!sale.action",
