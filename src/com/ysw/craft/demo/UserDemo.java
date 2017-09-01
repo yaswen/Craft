@@ -7,7 +7,7 @@ public class UserDemo {
 	public static void main(String[] args){
 		User user=UserDao.getUserByUserName("shiwen");//使用Dao类中的查询方法，获得名叫shiwen的User对象
 		int i=user.getGold();//获得shiwen的金钱
-		i+=10;//给金钱数目加10
+		i+=100;//给金钱数目加10
 		user.setGold(i);//将变量存入对象
 		UserDao.updateUser(user);//更新对象持久化
 	}
