@@ -12,6 +12,11 @@
 	margin: 0 auto;
 	top: 200px;
 }
+td{
+	width: 60px;
+	text-align: center;
+	height: 37px;
+}
 </style>
 </head>
 <body>

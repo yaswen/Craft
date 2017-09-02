@@ -17,6 +17,7 @@
 </head>
 <body>
 	<div id="all">
+	<h3 align="center">登录</h3>
 		<form action="login" method="post">
 			<table>
 				<tr>
@@ -36,6 +37,7 @@
 
 			</table>
 		</form>
+		<s:fielderror/>
 	<s:include value="/pages/common/bottom.jsp"></s:include>
 	</div>
 </body>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,6 +9,9 @@
 <script type="text/javascript" src="JS/jquery-1.7.2.min.js"></script>
 <script type="text/javascript">
 
+function start(){
+	$("#ga").load("ga.jsp");
+}
 	function buy() {
 		document.getElementById("ga").innerHTML = "计算中。。。";
 	    var userName = '<%=session.getAttribute("CurUser")%>';
@@ -43,12 +47,15 @@
 }
 </style>
 </head>
-<body>
+<body onload="start()">
 	<div id="all">
 		<h3>买卖武装，勇闯天涯</h3>
+		<div>
 		<button onclick="buy()">买武装</button>
 		<button onclick="sale()">卖武装</button>
 		<div id="ga"></div>
+		</div>
 	</div>
+	<s:include value="/pages/common/bottom.jsp"></s:include>
 </body>
 </html>
