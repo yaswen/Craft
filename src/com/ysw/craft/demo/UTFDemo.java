@@ -4,7 +4,8 @@ import java.io.UnsupportedEncodingException;
 
 public class UTFDemo {
 	public static void main(String args[]) {
-		gbk(0xB0A1);
+		String a=gbk(0xd8A2);
+		System.out.println(a);
 	}
 
 	public static void getutf() {
@@ -19,20 +20,23 @@ public class UTFDemo {
 
 	}
 
-	public static void gbk(int i) {
+	public static String gbk(int i) {
 		byte[] bytes = inToBytes(i);
 		try {
-			System.out.println(new String(bytes, "GBK"));
+			String str=new String(bytes, "GBK");
+			return str;
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
-		try {
+		
+		/*try {
 			System.out.println("啊".getBytes("GBK"));
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 	public static byte[] inToBytes(int i) {
