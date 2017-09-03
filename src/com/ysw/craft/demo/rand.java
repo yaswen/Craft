@@ -5,6 +5,10 @@ public class rand {
 	public static void main(String[] args) { 
 		quming("杨");
 	}
+	/**
+	 * 随机两个汉字作为名字，与xing拼接成随机姓名
+	 * @param xing
+	 */
 	public static void quming(String xing){
 		for(int y=0;y<100;y++){
 			System.out.print(xing+randStr()+randStr()+"\t");
@@ -14,6 +18,9 @@ public class rand {
 			}
 			}
 	}
+	/**
+	 * 随机输出1000个常用汉字
+	 */
 	public static void rand1000(){
 		for(int i=0;i<1000;i++){ 
 			String ss=randStr();
@@ -23,6 +30,11 @@ public class rand {
 				System.out.println();
 		}
 	}
+	/**
+	 * 随机输出一个常用汉字
+	 * 由于random的使用，貌似现在还没有涵盖所有汉字。
+	 * @return 一个常用汉字
+	 */
 	public static String randStr(){
 		java.util.Random r=new java.util.Random();
 		int t=r.nextInt();
