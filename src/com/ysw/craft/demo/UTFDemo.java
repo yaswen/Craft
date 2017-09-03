@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 
 public class UTFDemo {
 	public static void main(String args[]) {
-		String a=gbk(0xd8A2);
+		String a=gbk(0xD7F9);
 		System.out.println(a);
 	}
 
