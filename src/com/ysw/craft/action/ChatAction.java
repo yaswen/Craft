@@ -38,15 +38,15 @@ public class ChatAction extends ActionSupport implements ServletRequestAware{
 				List<String> list=(List<String>) session.getAttribute("ChatText");
 			}else{
 				List<String> list=new ArrayList();
-				list.add("聊天记录：");
+				list.add("聊天记录："+"<br>");
 				session.setAttribute("ChatText", list);
 			}
 			List<String> list=(List<String>) session.getAttribute("ChatText");
 			System.out.println("成功获取list"/*+list.get(0)*/);
 			if(list.size()==0 || list==null){
-				list.add("聊天记录：");
+				list.add("聊天记录："+"<br>");
 			}
-			list.add(t);
+			list.add(t+"<br>");
 			//将聊天内容保存到session中
 			session.setAttribute("ChatText", list);
 			return "success";

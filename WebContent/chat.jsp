@@ -5,13 +5,47 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>微波炉</title>
+<style type="text/css">
+        html
+        {
+         height:100%;
+         margin:0;
+        }
+        body
+        {
+            height:100%;
+            margin:0; 
+        }
+        #chattext{
+        	height:550px;
+        	max-height:550px;
+            margin:0; 
+        }
+    </style>
+<script type="text/javascript" src="JS/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+function send() {
+	//document.getElementById("ga").innerHTML = "计算中。。。";
+    var text = $("#text").val();
+    $.ajax({
+        url : "chat.action",
+        type : "GET",
+        data : "text=" + text,
+        success : function(data, textStatus) {
+				document.getElementById("chattext").innerHTML = data;
+        }
+    });
+}
+
+</script>
 </head>
 <body>
 	<div><h3>欢迎光临微波炉聊天机！</h3></div>
-	<div id="chattext"></div>
-	<form action="chat" method="post">
-		<input type="text" name="text"/><br/>
-		<input type="submit" value="发送"/>
-	</form>
+	<div id="chattext" height="500px"></div>
+	
+		<input type="text" id="text"/><br/>
+		
+		<button onclick="send()">发送</button>
+	
 </body>
 </html>
