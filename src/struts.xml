@@ -27,6 +27,9 @@
 		<action name="ga" class="com.ysw.craft.action.GaAction">
 			<result name="success">/ga.jsp</result>
 		</action>
+		<action name="chat" class="com.ysw.craft.action.ChatAction">
+			<result name="success">/chatting/chattext.jsp</result>
+		</action>
 	</package>
 	<!-- json-plugin返回json格式的一次尝试，但是未果。先注释掉放在这
 	<package name="ajaxDemo" extends="json-default" namespace="/" >
