@@ -7,6 +7,6 @@
 <title>chat_text</title>
 </head>
 <body>
-	${session.ChatText}
+	<foreach>${application.ChatText}</foreach>
 </body>
 </html>

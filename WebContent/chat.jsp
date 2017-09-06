@@ -25,7 +25,6 @@
 <script type="text/javascript" src="JS/jquery-1.7.2.min.js"></script>
 <script type="text/javascript">
 function send() {
-	//document.getElementById("ga").innerHTML = "计算中。。。";
     var text = $("#text").val();
     $.ajax({
         url : "chat.action",
