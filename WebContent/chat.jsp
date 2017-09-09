@@ -25,6 +25,7 @@ body {
 	height: 350px;
 	max-height: 450px;
 	margin: 0;
+	overflow:scroll;
 }
 </style>
 <script type="text/javascript" src="JS/jquery-1.7.2.min.js"></script>
@@ -41,11 +42,8 @@ function my() {
 	$.each(myct, function(i, val) {
 		document.getElementById("all").innerHTML +=val;
 	})
-	//var arr= new array(); 
-	<%-- <%for(int i=0; i <application.getAttribute("ChatText").length; i++){%> 
-	      arr[i]= <%=data[i].name%>; 
-	<%}%>  --%>
-	//document.getElementById("all").innerHTML = ct[1];
+	document.getElementById("chattext").scrollTop = document.getElementById("chattext").scrollHeight;
+	//使滚动条自动往下滚到底
 }
 	function send() {
 		var text = $("#text").val();

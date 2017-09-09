@@ -40,9 +40,6 @@ public class ChatAction extends ActionSupport implements ServletRequestAware{
 			System.out.println("开始聊天action");
 			String t=text;
 			System.out.println(t + "代表着："+text);
-			//获得session对象
-			//HttpSession session=request.getSession();
-			//System.out.println("成功获取session");
 			if(null!=application.getAttribute("ChatText")){
 				List<String> list=(List<String>) application.getAttribute("ChatText");
 			}else{

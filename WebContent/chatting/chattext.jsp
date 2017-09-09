@@ -31,7 +31,7 @@
 <body onload="my()">
 	<button onclick="my()">载入</button>
 	<input type="hidden" value="${application.ChatText}" id="ct"/>  
-    
+    <div id="msg_end" style="height:0px; overflow:hidden"></div>
 	<div id="all"></div>
 	<%-- <foreach>${application.ChatText}</foreach> --%>
 </body>
