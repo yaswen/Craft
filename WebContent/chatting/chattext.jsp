@@ -8,7 +8,9 @@
 <script type="text/javascript" src="../JS/jquery-1.7.2.min.js"></script>
 <script type="text/javascript">
 	function my() {
-		var ct ='<s:property value="#application.ChatText" escapeHtml="false"/>';
+		
+		var ct = document.getElementById('ct').value ;
+		
 		var myct=ct.split(",");//将字符串按逗号分割为字符串数组
 		myct.shift();//刪除數組第一個元素
 		myct.pop();//刪除數組最後一個元素
@@ -28,6 +30,8 @@
 </head>
 <body onload="my()">
 	<button onclick="my()">载入</button>
+	<input type="hidden" value="${application.ChatText}" id="ct"/>  
+    
 	<div id="all"></div>
 	<%-- <foreach>${application.ChatText}</foreach> --%>
 </body>
