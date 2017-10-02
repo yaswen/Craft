@@ -8,14 +8,14 @@
 
 <style type="text/css">
 #all {
-	background-color: #D9DDDD;
+	background-color: #FFFFFF;
 	width: 800px;
 	margin: 0 auto;
 	top: 200px;
 }
 
 #top {
-	height: 40px;
+	height: 108px;
 }
 
 .mid {
@@ -31,6 +31,17 @@
 #picture {
 	background-color: #FF99CC;
 }
+
+#titlepng {
+	width: 480px;
+	float: left;
+	height: 108px;
+}
+#userbox {
+	width: 200px;
+	float: right;
+	height: 108px;
+}
 </style>
 <script type="text/javascript" src="JS/jquery-1.7.2.min.js"></script>
 
@@ -39,10 +50,10 @@
 <body>
 	<div id="all">
 		<div id="top">
-			<div align="left">
-				<h1>诗文吃饭香</h1>
+			<div id="titlepng" align="left">
+				<img src="images/诗文吃饭香.png"/>
 			</div>
-			<div align="right">
+			<div id="userbox" align="right">
 				<a href="login.jsp">登录</a> <a href="signup.jsp">注册</a>
 			</div>
 		</div>

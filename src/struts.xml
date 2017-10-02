@@ -13,7 +13,7 @@
 			对应的类的路径 method: 调用Action中的方法名 -->
 
 		<action name="login" class="com.ysw.craft.action.LoginAction">
-			<result name="ok">/gap.jsp</result>
+			<result name="ok">/index.jsp</result>
 			<result name="error">/a.jsp</result>
 			<result name="input">/login.jsp</result>
 			
