@@ -102,8 +102,8 @@ var userName = '<%=session.getAttribute("CurUser")%>';
 	} else {
 		$('#clickGame').show();
 		$('#loginPrompt').hide();
-		$('#userbox').hide();
-		$('#usernamebox').show();
+		$('#userbox').show();
+		$('#usernamebox').hide();
 	}
 </script>
 </html>
