@@ -49,6 +49,9 @@
 	height: 108px;
 }
 #usernamebox{
+	width: 200px;
+	float: right;
+	height: 108px;
 }
 </style>
 <script type="text/javascript" src="JS/jquery-1.7.2.min.js"></script>
@@ -95,15 +98,15 @@
 
 
 <script type="text/javascript">
-var userName = '<%=session.getAttribute("CurUser")%>';
-	if (userName.length != 0) {
-		$('#clickGame').hide();
-		$('#loginPrompt').show();
-		$('#userbox').hide();
-		$('#usernamebox').show();
-	} else {
+var userName = "<%=session.getAttribute("CurUser")%>";
+	if (userName.length != 0 && userName != "null") {//用户已登录
 		$('#clickGame').show();
 		$('#loginPrompt').hide();
+		$('#userbox').hide();
+		$('#usernamebox').show();
+	} else {//用户未登录
+		$('#clickGame').hide();
+		$('#loginPrompt').show();
 		$('#userbox').show();
 		$('#usernamebox').hide();
 	}
