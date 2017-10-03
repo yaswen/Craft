@@ -19,9 +19,13 @@
 }
 
 .mid {
-	width: 200px;
+	width: 150px;
 	float: left;
-	height: 200px;
+	height: 180px;
+	margin: 10px;
+	border-radius:15px;
+	
+	padding:15px;
 }
 
 #game {
