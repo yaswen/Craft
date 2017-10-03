@@ -48,6 +48,8 @@
 	float: right;
 	height: 108px;
 }
+#usernamebox{
+}
 </style>
 <script type="text/javascript" src="JS/jquery-1.7.2.min.js"></script>
 
