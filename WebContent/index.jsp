@@ -62,6 +62,9 @@
 			<div id="userbox" align="right">
 				<a href="login.jsp">登录</a> <a href="signup.jsp">注册</a>
 			</div>
+			<div id="usernamebox" align="right">
+				<p>${session.CurUser}<p> 欢迎来玩！
+			</div>
 		</div>
 		<div id="mid">
 			<div id="game" class="mid">
@@ -94,9 +97,13 @@ var userName = '<%=session.getAttribute("CurUser")%>';
 	if (userName.length != 0) {
 		$('#clickGame').hide();
 		$('#loginPrompt').show();
+		$('#userbox').hide();
+		$('#usernamebox').show();
 	} else {
 		$('#clickGame').show();
 		$('#loginPrompt').hide();
+		$('#userbox').hide();
+		$('#usernamebox').show();
 	}
 </script>
 </html>
