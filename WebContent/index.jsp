@@ -31,6 +31,12 @@
 #picture {
 	background-color: #FF99CC;
 }
+#chat{
+	background-color: #AFF9DD;
+}
+#first{
+	background-color: #BBDDFF;
+}
 
 #titlepng {
 	width: 480px;
@@ -65,11 +71,20 @@
 
 			</div>
 			<div id="picture" class="mid">
-				<b>看图</b><br> 暂时只有两张图片，让你大饱眼福<br> <a
+				<b>看图</b>（二院）<br> 暂时只有两张图片，让你大饱眼福<br> <a
 					href="pages/test/second.jsp">点击这里进入</a>
 			</div>
+			<div id="chat" class="mid">
+				<b>微波炉聊天</b><br> 在这里你跟对方谁也不知道谁是谁的聊天，聊到昏天黑地<br> 
+				<a href="chat.jsp">点击这里进入</a>
+			</div>
+			<div id="first" class="mid">
+				<b>未完成first</b><br> 这是未完成的页面。可以更改二院的次数前面的数字。<br> 
+				<a href="first.jsp">点击这里进入</a>
+			</div>
 		</div>
-
+	
+	<s:include value="/pages/common/bottom.jsp"></s:include>
 	</div>
 </body>
 

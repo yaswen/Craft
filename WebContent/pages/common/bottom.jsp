@@ -9,6 +9,8 @@
 <body>
 	<div id="bottom">
 		<div align="center">
+			<br>
+			<hr>
 			<p>本页面由Shiwen编写</p>
 			<a href="http://localhost:8080/Craft/index.jsp">返回主页</a>
 		</div>
