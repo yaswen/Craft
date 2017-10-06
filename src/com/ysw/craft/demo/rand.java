@@ -18,6 +18,12 @@ public class rand {
 			}
 			}
 	}
+	public static String quming1(String xing){
+		
+			return (xing+randStr()+randStr()+"\t");
+			
+			
+	}
 	/**
 	 * 随机输出1000个常用汉字
 	 */

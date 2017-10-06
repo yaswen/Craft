@@ -94,6 +94,10 @@
 				<b>未完成first</b><br> 这是未完成的页面。可以更改二院的次数前面的数字。<br> 
 				<a href="first.jsp">点击这里进入</a>
 			</div>
+			<div id="naming" class="mid">
+				<b>取名字</b><br> 根据姓，随机给你取个响亮又不失文雅的名字。<br> 
+				<a href="naming.jsp">点击这里进入</a>
+			</div>
 		</div>
 	
 	<s:include value="/pages/common/bottom.jsp"></s:include>
