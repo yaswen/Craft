@@ -38,8 +38,18 @@ public class NamingAction {
 	public String execute() {
 		System.out.println(xing);
 		ActionContext ctx = ActionContext.getContext();
-		String names = "";
+		/*String names=(String)ctx.getApplication().get("Names");
+		if (names == null){
+			names = "";
+		}*/
+		String names="";
+		for(int i=0;i<100;i++) {
 		names+=rand.quming1(xing);
+		names+="\t\t";
+		if(i%10==9) {
+			names+="<br>";
+		}
+		}
 		System.out.println(names);
 		ctx.getApplication().put("Names", names);
 		return "success";

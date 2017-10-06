@@ -41,6 +41,9 @@
 #first{
 	background-color: #BBDDFF;
 }
+#naming{
+	background-color: #EEDDC0;
+}
 
 #titlepng {
 	width: 480px;

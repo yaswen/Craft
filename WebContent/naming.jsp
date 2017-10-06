@@ -7,10 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="JS/jquery-1.7.2.min.js"></script>
 <script type="text/javascript">
-	alert("a");
+
 	function send(){
 		var text = $("#text").val();
 		if (text == "") {
+			return;
+		}
+		if (text.length > 2){
+			alert("姓最多两个字！");
 			return;
 		}
 		$.ajax({
@@ -25,7 +29,7 @@
 			}
 		});
 
-		document.getElementById("text").value = "";
+		//document.getElementById("text").value = "";
 		document.getElementById("text").focus();
 		//changeccolor();
 	}
@@ -72,6 +76,7 @@ button {
 	</div>
 	<div id="nametext" sytle="height:500px"></div>
 	<div id="in">
+		输入要取名的姓：<br>
 		<input type="text" id="text" onkeypress="EnterPress(event)"
 			onkeydown="EnterPress()" />
 		<button onclick="send()">发送</button>
