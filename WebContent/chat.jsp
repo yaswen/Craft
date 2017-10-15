@@ -121,5 +121,6 @@ button {
 	</div>
 	<input type="hidden" id="cif2" />
 	<input type="hidden" id="chattext2" />
+	<s:include value="/pages/common/bottom.jsp"></s:include>
 </body>
 </html>

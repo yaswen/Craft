@@ -17,11 +17,13 @@
 #top {
 	height: 108px;
 }
-
+#mid{
+	height:400px;
+}
 .mid {
 	width: 150px;
 	float: left;
-	height: 180px;
+	height: 150px;
 	margin: 10px;
 	border-radius:15px;
 	
@@ -93,16 +95,16 @@
 				<b>微波炉聊天</b><br> 在这里你跟对方谁也不知道谁是谁的聊天，聊到昏天黑地<br> 
 				<a href="chat.jsp">点击这里进入</a>
 			</div>
-			<div id="first" class="mid">
-				<b>未完成first</b><br> 这是未完成的页面。可以更改二院的次数前面的数字。<br> 
-				<a href="first.jsp">点击这里进入</a>
-			</div>
 			<div id="naming" class="mid">
 				<b>取名字</b><br> 根据姓，随机给你取个响亮又不失文雅的名字。<br> 
 				<a href="naming.jsp">点击这里进入</a>
 			</div>
+			<div id="first" class="mid">
+				<b>未完成first</b><br> 这是未完成的页面。可以更改二院的次数前面的数字。<br> 
+				<a href="first.jsp">点击这里进入</a>
+			</div>
+			
 		</div>
-	
 	<s:include value="/pages/common/bottom.jsp"></s:include>
 	</div>
 </body>
