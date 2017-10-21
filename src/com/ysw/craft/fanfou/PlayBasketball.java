@@ -5,23 +5,27 @@ import java.util.Random;
 public class PlayBasketball {
 	static String aname[]= {"库里","杜兰特","汤普森","格林","伊戈达拉"};
 	static String bname[]= {"威少","乔治","罗伯森","亚当斯","安东尼"};
-	static int aa[]= {4,5,3,1,2};//A队基础攻击
-	static int ap[]= {3,5,2,2,4};//A队转换攻击
-	static int ad[]= {1,3,2,5,3};//A队防守
-	static int ba[]= {3,3,0,1,4};//B队基础攻击
-	static int bp[]= {5,3,1,1,2};//B队转换攻击
-	static int bd[]= {2,3,3,3,0};//B队防守
+	static int aa[]= {3,3,2,1,0};//A队基础攻击
+	static int ap[]= {3,2,0,1,2};//A队转换攻击
+	static int ad[]= {1,2,2,3,2};//A队防守
+	
+	static int ba[]= {1,2,0,1,3};//B队基础攻击
+	static int bp[]= {5,2,1,1,0};//B队转换攻击
+	static int bd[]= {1,2,2,1,0};//B队防守
+	
+	
 	public static void main(String[] args) {
 		
 		int ts=0,ss=0;
 		int aquarter[]= {0,0,0,0};
 		int bquarter[]= {0,0,0,0};
+		int ascore[] = {0,0,0,0,0};
+		int bscore[]= {0,0,0,0,0};
 		for(int i = 1 ; i <= 12 ; i++) {
 			int t=score(aa,ap,ad,aname);
 			int s=score(ba,bp,bd,bname);
 			
-//			int t=r.nextInt()%(a[0]+5)+8+a[0];
-//			int s=r.nextInt()%(b[0]+5)+8+b[0];
+
 			aquarter[(i-1)/3]+=t;
 			bquarter[(i-1)/3]+=s;
 			ts+=t;
@@ -96,6 +100,14 @@ public class PlayBasketball {
  *		则平均基础进攻+转换进攻期望=2.83。这种球队类似黄蜂、掘金、爵士，没有超级巨星，阵容实力平均。
  *		但是如果是勇士、骑士这类巨头球队，替补又好，不可能巨头一多，场均得分就140吧，因此应加入球权机制：
  *			一套阵容平均进攻能力值太高，按比例削弱，如果有了体力机制，球权机制削弱了进攻，可以加强体力，这样多出来的体力可以加大防守的效果。
+ *		一期先不做体力、不做球权，只要计算双方得分，勇士这类球队自然要比篮网和湖人赢的概率大，这不太平衡了。没办法，这就是篮球。
+ *		体力有一种新想法，每个球员，仅以一个数值表示体力，例如哈登体力为8，他就只能打8小节，如果安排哈登上了超过8小节，到第9小节时候所有数据大幅下滑。
  *		
+ *	一期目标：
+ *		打满一场应该得平均110分左右，大部分分布在90-125分左右，小概率出现50-160分，其余范围不应出现。
+ *		不同队伍拥有不同阵容
+ *		12个小节有不同的阵容
+ *
+ *		上述简版体力
  * */
 }
