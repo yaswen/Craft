@@ -6,11 +6,24 @@ public class Team {
 	
 	public static void main(String[] args) {
 		Team[] t=getTeam();
+		for(int i=0;i<5;i++) {
+			System.out.println("\n球队名："+t[i].name);
+			for(int j=0;j<10;j++) {
+				String name=t[i].players[j].getName();
+				int a=t[i].players[j].getA();
+				int p=t[i].players[j].getP();
+				int d=t[i].players[j].getD();
+				System.out.println("球员姓名："+name+"\t基础进攻："+a+"\t转换进攻："+p+"\t防守："+d);
+				
+			}
+			
+		}
 		String name=t[0].players[1].getName();
 		int a=t[0].players[1].getA();
 		int p=t[0].players[1].getP();
 		int d=t[0].players[1].getD();
 		System.out.println("球员姓名："+name+"\t基础进攻："+a+"\t转换进攻："+p+"\t防守："+d);
+		//成功取到球员信息。
 	}
 	public String name;
 	public Player[] players;
@@ -50,16 +63,16 @@ public class Team {
 	}
 	public static Team[] getTeam() {
 		String txt=txttest.basketballfile();
-		System.out.println(txt);
+		//System.out.println(txt);
 		Team[] teams=new Team[5];
 		for(int i=1;i<=teams.length;i++) {
 			String tx=txt.split("&")[i];//第0个舍去
-			System.out.println(tx);
+			//System.out.println(tx);
 			String tname=tx.split("\n")[0];//第一个的位置为队名
-			System.out.println(tname);
+			//System.out.println(tname);
 			teams[i-1]=new Team();
-			//teams[i-1].setName(tname);//获取队名
-			System.out.println(teams[i-1].name);
+			teams[i-1].setName(tname);//获取队名
+			//System.out.println(teams[i-1].name);
 			Player[] players=new Player[10];//声明Players数组
 			for(int j=1;j<=10;j++) {
 				String t=tx.split("\r\n")[j];
