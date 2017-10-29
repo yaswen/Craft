@@ -3,15 +3,15 @@ package com.ysw.craft.fanfou;
 import java.util.Random;
 
 public class PlayBasketball {
-	static String aname[]= {"库里","杜兰特","汤普森","格林","伊戈达拉"};
-	static String bname[]= {"威少","乔治","罗伯森","亚当斯","安东尼"};
-	static int aa[]= {3,3,2,1,0};//A队基础攻击
-	static int ap[]= {3,2,0,1,2};//A队转换攻击
-	static int ad[]= {1,2,2,3,2};//A队防守
-	
-	static int ba[]= {1,2,0,1,3};//B队基础攻击
-	static int bp[]= {5,2,1,1,0};//B队转换攻击
-	static int bd[]= {1,2,2,1,0};//B队防守
+//	static String aname[]= {"库里","杜兰特","汤普森","格林","伊戈达拉"};
+//	static String bname[]= {"威少","乔治","罗伯森","亚当斯","安东尼"};
+//	static int aa[]= {3,3,2,1,0};//A队基础攻击
+//	static int ap[]= {3,2,0,1,2};//A队转换攻击
+//	static int ad[]= {1,2,2,3,2};//A队防守
+//	
+//	static int ba[]= {1,2,0,1,3};//B队基础攻击
+//	static int bp[]= {5,2,1,1,0};//B队转换攻击
+//	static int bd[]= {1,2,2,1,0};//B队防守
 	
 	
 	public static void main(String[] args) {
@@ -21,7 +21,21 @@ public class PlayBasketball {
 		int bquarter[]= {0,0,0,0};
 		int ascore[] = {0,0,0,0,0};
 		int bscore[]= {0,0,0,0,0};
+		
+		
+		
 		for(int i = 1 ; i <= 12 ; i++) {
+			Teams a=Teams.getTeams(1,i);
+			Teams b=Teams.getTeams(2, i);
+String aname[]= a.getName();
+String bname[]= b.getName();
+int aa[]= a.getA();//A队基础攻击
+int ap[]= a.getP();//A队转换攻击
+int ad[]= a.getD();//A队防守
+
+int ba[]= b.getA();//B队基础攻击
+int bp[]= b.getP();//B队转换攻击
+int bd[]= b.getD();//B队防守
 			int t=score(aa,ap,ad,aname);
 			int s=score(ba,bp,bd,bname);
 			

@@ -14,15 +14,8 @@ public class Team {
 				int p=t[i].players[j].getP();
 				int d=t[i].players[j].getD();
 				System.out.println("球员姓名："+name+"\t基础进攻："+a+"\t转换进攻："+p+"\t防守："+d);
-				
 			}
-			
 		}
-		String name=t[0].players[1].getName();
-		int a=t[0].players[1].getA();
-		int p=t[0].players[1].getP();
-		int d=t[0].players[1].getD();
-		System.out.println("球员姓名："+name+"\t基础进攻："+a+"\t转换进攻："+p+"\t防守："+d);
 		//成功取到球员信息。
 	}
 	public String name;
