@@ -27,15 +27,15 @@ public class PlayBasketball {
 		for(int i = 1 ; i <= 12 ; i++) {
 			Teams a=Teams.getTeams(1,i);
 			Teams b=Teams.getTeams(2, i);
-String aname[]= a.getName();
-String bname[]= b.getName();
-int aa[]= a.getA();//A队基础攻击
-int ap[]= a.getP();//A队转换攻击
-int ad[]= a.getD();//A队防守
-
-int ba[]= b.getA();//B队基础攻击
-int bp[]= b.getP();//B队转换攻击
-int bd[]= b.getD();//B队防守
+			String aname[]= a.getName();
+			String bname[]= b.getName();
+			int aa[]= a.getA();//A队基础攻击
+			int ap[]= a.getP();//A队转换攻击
+			int ad[]= a.getD();//A队防守
+			int ba[]= b.getA();//B队基础攻击
+			int bp[]= b.getP();//B队转换攻击
+			int bd[]= b.getD();//B队防守
+			
 			int t=score(aa,ap,ad,aname);
 			int s=score(ba,bp,bd,bname);
 			
@@ -122,6 +122,6 @@ int bd[]= b.getD();//B队防守
  *		不同队伍拥有不同阵容
  *		12个小节有不同的阵容
  *
- *		上述简版体力
+ *		上述简版体力/模拟定死轮换
  * */
 }

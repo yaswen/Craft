@@ -2,7 +2,24 @@ package com.ysw.craft.fanfou;
 
 
 public class Teams {
-	
+	public static int[][] lineup= {
+			{0,1,2,3,4},
+			{0,1,5,3,4},
+			{0,5,6,7,8},
+			
+			{1,5,2,6,8},
+			{1,2,7,3,4},
+			{0,5,2,3,4},
+			
+			{0,1,2,3,4},
+			{0,5,2,6,3},
+			{0,5,7,9,4},
+			
+			
+			{1,5,6,7,8},
+			{0,5,2,3,8},
+			{0,1,2,3,4}
+	};
 	
 	public String name[];
 	public int a[];
@@ -12,7 +29,9 @@ public class Teams {
 	
 	
 	
-	
+	public static void main(String[] args) {
+		System.out.println(lineup[5][0]);
+	}
 	
 	
 	public String[] getName() {
@@ -40,11 +59,29 @@ public class Teams {
 		this.d = d;
 	}
 	public static Teams getTeams(int teamId,int quarterId) {
+		quarterId--;
 		Teams teams=new Teams();
 		Team team=Team.getTeam()[teamId];
+		//根据lineup分配阵容模块
+		int a[]=new int[5];
+		int p[]=new int[5];
+		int d[]=new int[5];
+		String n[]=new String[5];
+		for(int i=0;i<5;i++) {
+			a[i]=team.players[lineup[quarterId][i]].getA();
+			p[i]=team.players[lineup[quarterId][i]].getP();
+			d[i]=team.players[lineup[quarterId][i]].getD();
+			n[i]=team.players[lineup[quarterId][i]].getName();
+		}
+		teams.setA(a);
+		teams.setD(d);
+		teams.setP(p);
+		teams.setName(n);
 		
-		//判断小节模块
-		if(quarterId<8) {
+		
+		
+		/*//判断小节模块
+		if(quarterId<=8) {
 			int a[]=new int[5];
 			int p[]=new int[5];
 			int d[]=new int[5];
@@ -74,7 +111,7 @@ public class Teams {
 			teams.setD(d);
 			teams.setP(p);
 			teams.setName(n);
-		}
+		}*/
 		return teams;
 	}
 }
