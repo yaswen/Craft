@@ -57,7 +57,7 @@ public class Team {
 	public static Team[] getTeam() {
 		String txt=txttest.basketballfile();
 		//System.out.println(txt);
-		Team[] teams=new Team[5];
+		Team[] teams=new Team[9];
 		for(int i=1;i<=teams.length;i++) {
 			String tx=txt.split("&")[i];//第0个舍去
 			//System.out.println(tx);

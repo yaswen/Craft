@@ -8,25 +8,25 @@ public class PlayBasketball {
 //	static int aa[]= {3,3,2,1,0};//A队基础攻击
 //	static int ap[]= {3,2,0,1,2};//A队转换攻击
 //	static int ad[]= {1,2,2,3,2};//A队防守
-//	
 //	static int ba[]= {1,2,0,1,3};//B队基础攻击
 //	static int bp[]= {5,2,1,1,0};//B队转换攻击
 //	static int bd[]= {1,2,2,1,0};//B队防守
-	
-	
 	public static void main(String[] args) {
-		
 		int ts=0,ss=0;
-		int aquarter[]= {0,0,0,0};
-		int bquarter[]= {0,0,0,0};
-		int ascore[] = {0,0,0,0,0};
-		int bscore[]= {0,0,0,0,0};
+		int aquarter[]= {0,0,0,0};int bquarter[]= {0,0,0,0};
+		int ascore[] = {0,0,0,0,0,0,0,0,0,0};int bscore[]= {0,0,0,0,0,0,0,0,0,0};
+		int[][] lineup=Teams.lineup;//假装获得一下阵容，待会儿用这个记录每个球员得分
+		int teama=1;//交战两队
+		int teamb=0;//交战两队
+		
+		Team tma=Team.getTeam()[teama];
+		Team tmb=Team.getTeam()[teamb];
 		
 		
 		
 		for(int i = 1 ; i <= 12 ; i++) {
-			Teams a=Teams.getTeams(1,i);
-			Teams b=Teams.getTeams(2, i);
+			Teams a=Teams.getTeams(teama, i);
+			Teams b=Teams.getTeams(teamb, i);
 			String aname[]= a.getName();
 			String bname[]= b.getName();
 			int aa[]= a.getA();//A队基础攻击
@@ -36,8 +36,20 @@ public class PlayBasketball {
 			int bp[]= b.getP();//B队转换攻击
 			int bd[]= b.getD();//B队防守
 			
-			int t=score(aa,ap,ad,aname);
-			int s=score(ba,bp,bd,bname);
+			int t=0;			
+			for(int ia=0;ia<5;ia++) {
+				int si=atk(aa[ia],ap[ia],bd[ia]);//单个球员得分
+				System.out.print(aname[ia]+"得分"+si+"\t");
+				t+=si;
+				ascore[lineup[i-1][ia]]+=si;//记录球员数据统计
+			}			
+			int s=0;
+			for(int ib=0;ib<5;ib++) {
+				int si=atk(aa[ib],ap[ib],bd[ib]);//单个球员得分
+				System.out.print(bname[ib]+"得分"+si+"\t");
+				s+=si;
+				bscore[lineup[i-1][ib]]+=si;//记录球员数据统计
+			}	
 			
 
 			aquarter[(i-1)/3]+=t;
@@ -54,7 +66,19 @@ public class PlayBasketball {
 				+aquarter[1]+"-"+bquarter[1]+"，"
 				+aquarter[2]+"-"+bquarter[2]+"，"
 				+aquarter[3]+"-"+bquarter[3]+"，");
-		
+		for(int ip=0;ip<10;ip++) {
+			System.out.print(tma.players[ip].getName()+"总得分" +ascore[ip]+"\t");
+			if(ip==4) {
+				System.out.println();
+			}
+		}
+		System.out.println();
+		for(int ip=0;ip<10;ip++) {
+			System.out.print(tmb.players[ip].getName()+"总得分" +bscore[ip]+"\t");
+			if(ip==4) {
+				System.out.println();
+			}
+		}
 	}
 	
 	
@@ -67,7 +91,7 @@ public class PlayBasketball {
 		}
 		return s;
 	}
-	public static int basescore(int a[],int p[],int db[],String aname[]) {
+	/*public static int basescore(int a[],int p[],int db[],String aname[]) {
 		int s=0;
 		for(int i=0;i<5;i++) {
 			int si=atk(a[i],p[i],db[i]);
@@ -75,7 +99,7 @@ public class PlayBasketball {
 			s+=si;
 		}
 		return s;
-	}
+	}*/
 	public static int atk(int a,int p,int d) {
 		Random r=new Random();
 		int s=0;
