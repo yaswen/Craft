@@ -17,14 +17,14 @@ public class PlayBasketball {
 		int ascore[] = {0,0,0,0,0,0,0,0,0,0};int bscore[]= {0,0,0,0,0,0,0,0,0,0};
 		int[][] lineup=Teams.lineup;//假装获得一下阵容，待会儿用这个记录每个球员得分
 		int teama=1;//交战两队
-		int teamb=0;//交战两队
+		int teamb=7;//交战两队
 		
 		Team tma=Team.getTeam()[teama];
 		Team tmb=Team.getTeam()[teamb];
 		
 		
 		
-		for(int i = 1 ; i <= 12 ; i++) {
+		for(int i = 1 ; i <= 12 || ts==ss ; i++) {
 			Teams a=Teams.getTeams(teama, i);
 			Teams b=Teams.getTeams(teamb, i);
 			String aname[]= a.getName();

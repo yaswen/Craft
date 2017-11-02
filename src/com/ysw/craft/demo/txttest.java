@@ -28,6 +28,7 @@ public class txttest {
     public static void main(String[] args){
         File file = new File("WebContent/pages/1.txt");
         System.out.println(txt2String(file));
+        
     }
     public static String basketballfile() {
     	File file = new File("WebContent/pages/1.txt");
