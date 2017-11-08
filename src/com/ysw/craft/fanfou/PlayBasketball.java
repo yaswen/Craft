@@ -3,26 +3,31 @@ package com.ysw.craft.fanfou;
 import java.util.Random;
 
 public class PlayBasketball {
-//	static String aname[]= {"库里","杜兰特","汤普森","格林","伊戈达拉"};
-//	static String bname[]= {"威少","乔治","罗伯森","亚当斯","安东尼"};
-//	static int aa[]= {3,3,2,1,0};//A队基础攻击
-//	static int ap[]= {3,2,0,1,2};//A队转换攻击
-//	static int ad[]= {1,2,2,3,2};//A队防守
-//	static int ba[]= {1,2,0,1,3};//B队基础攻击
-//	static int bp[]= {5,2,1,1,0};//B队转换攻击
-//	static int bd[]= {1,2,2,1,0};//B队防守
+
 	public static void main(String[] args) {
+		playGame(1,7);
+	}
+	
+	/**
+	 * 打篮球主方法,输入两队标号，进行比赛，并发饭否。
+	 * @param teama/teamb 交战两队
+	 */
+	public static void playGame(int teama,int teamb){
 		int ts=0,ss=0;
 		int aquarter[]= {0,0,0,0};int bquarter[]= {0,0,0,0};
-		int ascore[] = {0,0,0,0,0,0,0,0,0,0};int bscore[]= {0,0,0,0,0,0,0,0,0,0};
-		int[][] lineup=Teams.lineup;//假装获得一下阵容，待会儿用这个记录每个球员得分
-		int teama=1;//交战两队
-		int teamb=7;//交战两队
+		int ascore[] = {0,0,0,0,0,0,0,0,0,0};int bscore[]= {0,0,0,0,0,0,0,0,0,0};//双方每个球员得分
+		int aquarterScore[][]= {{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0}};//双方每个球员单节得分
+		int bquarterScore[][]= {{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0}};
+		
+		int[][] lineupa=Teams.lineup;//获得阵容，待会儿需要用这个记录每个球员得分
+		int[][] lineupb=Teams.lineup;//获得阵容，待会儿需要用这个记录每个球员得分
+		
+		String[] fanfou=new String[5];//要发的饭否，四节各一条，最终总结一条。
 		
 		Team tma=Team.getTeam()[teama];
 		Team tmb=Team.getTeam()[teamb];
 		
-		
+		/*======以上为整场比赛初始化---以下为12小节循环======*/
 		
 		for(int i = 1 ; i <= 12 || ts==ss ; i++) {
 			int ot=0;//加时数
@@ -41,33 +46,37 @@ public class PlayBasketball {
 			int bp[]= b.getP();//B队转换攻击
 			int bd[]= b.getD();//B队防守
 			
-			int t=0;			
+			/*======以上为小节内双方数据初始化---以下为小节内双方五人得分计算======*/
+			int t=0;
 			for(int ia=0;ia<5;ia++) {
 				int si=atk(aa[ia],ap[ia],bd[ia]);//单个球员得分
 				System.out.print(aname[ia]+"得分"+si+"\t");
 				t+=si;
-				ascore[lineup[i-1][ia]]+=si;//记录球员数据统计
+				ascore[lineupa[i-1][ia]]+=si;//记录球员数据统计
+				aquarterScore[(i-1)/3][lineupa[i-1][ia]]+=si;
 			}			
 			int s=0;
 			for(int ib=0;ib<5;ib++) {
-				int si=atk(aa[ib],ap[ib],bd[ib]);//单个球员得分
+				int si=atk(ba[ib],bp[ib],ad[ib]);//单个球员得分
 				System.out.print(bname[ib]+"得分"+si+"\t");
 				s+=si;
-				bscore[lineup[i-1][ib]]+=si;//记录球员数据统计
+				bscore[lineupb[i-1][ib]]+=si;//记录球员数据统计
+				bquarterScore[(i-1)/3][lineupb[i-1][ib]]+=si;
 			}	
-			
-
+			/*======以上为小节内双方五人得分数据计算---以下为小节关联大节事项======*/
 			aquarter[(i-1)/3]+=t;
 			bquarter[(i-1)/3]+=s;
-			
 			System.out.println(t+"\t"+s);
+			/*============以下为大节事项============*/
+			
+			
 			if(i%3==0&&ot==0) {
-				
 				System.out.println("第"+(i/3)+"节的比分为："+aquarter[(i-1)/3]+"比"+bquarter[(i-1)/3]+"。");
 			}else if(i==12) {
+				/*======以下为加时赛事项======*/
 				System.out.println("第"+ot+"加时的比分为："+t+"比"+s+"。");
 			}
-			
+			/*======以上为大节事项---以下为小节关联整场比赛事项======*/
 			ts+=t;
 			ss+=s;
 		}
@@ -92,9 +101,28 @@ public class PlayBasketball {
 				System.out.println();
 			}
 		}
+		System.out.println();
+		System.out.println();
+		for(int ip=0;ip<10;ip++) {
+			for(int jp=0;jp<4;jp++) {
+				System.out.print(tma.players[ip].getName()+"第"+(jp+1)+"节得分"+aquarterScore[jp][ip]+"\t");
+			}
+			if(ip%2==1) {
+				System.out.println();
+			}
+		}
+		System.out.println();
+		for(int ip=0;ip<10;ip++) {
+			for(int jp=0;jp<4;jp++) {
+				System.out.print(tmb.players[ip].getName()+"第"+(jp+1)+"节得分"+bquarterScore[jp][ip]+"\t");
+			}
+			if(ip%2==1) {
+				System.out.println();
+			}
+		}
 	}
 	
-	
+	/*
 	public static int score(int a[],int p[],int db[],String aname[]) {
 		int s=0;
 		for(int i=0;i<5;i++) {
@@ -103,7 +131,7 @@ public class PlayBasketball {
 			s+=si;
 		}
 		return s;
-	}
+	}*/
 	/*public static int basescore(int a[],int p[],int db[],String aname[]) {
 		int s=0;
 		for(int i=0;i<5;i++) {
