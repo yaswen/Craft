@@ -25,6 +25,11 @@ public class PlayBasketball {
 		
 		
 		for(int i = 1 ; i <= 12 || ts==ss ; i++) {
+			int ot=0;//加时数
+			if(ts==ss&&i==13) {
+				i--;
+				ot+=1;
+			}
 			Teams a=Teams.getTeams(teama, i);
 			Teams b=Teams.getTeams(teamb, i);
 			String aname[]= a.getName();
@@ -54,18 +59,26 @@ public class PlayBasketball {
 
 			aquarter[(i-1)/3]+=t;
 			bquarter[(i-1)/3]+=s;
+			
+			System.out.println(t+"\t"+s);
+			if(i%3==0&&ot==0) {
+				
+				System.out.println("第"+(i/3)+"节的比分为："+aquarter[(i-1)/3]+"比"+bquarter[(i-1)/3]+"。");
+			}else if(i==12) {
+				System.out.println("第"+ot+"加时的比分为："+t+"比"+s+"。");
+			}
+			
 			ts+=t;
 			ss+=s;
-			System.out.println(t+"\t"+s);
-			if(i%3==0) {
-				System.out.println("第"+(i/3)+"节的比分为："+aquarter[(i-1)/3]+"比"+bquarter[(i-1)/3]+"。");
-			}
 		}
 		System.out.println("最终比分为："+ts+"比"+ss+"！四节比分分别为："
 				+aquarter[0]+"-"+bquarter[0]+"，"
 				+aquarter[1]+"-"+bquarter[1]+"，"
 				+aquarter[2]+"-"+bquarter[2]+"，"
 				+aquarter[3]+"-"+bquarter[3]+"，");
+		/**
+		 * 输出双方球员总得分
+		 */
 		for(int ip=0;ip<10;ip++) {
 			System.out.print(tma.players[ip].getName()+"总得分" +ascore[ip]+"\t");
 			if(ip==4) {
