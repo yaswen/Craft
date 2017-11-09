@@ -57,11 +57,11 @@ public class Team {
 	public static Team[] getTeam() {
 		String txt=txttest.basketballfile();
 		//System.out.println(txt);
-		Team[] teams=new Team[9];
+		Team[] teams=new Team[30];
 		for(int i=1;i<=teams.length;i++) {
 			String tx=txt.split("&")[i];//第0个舍去
 			//System.out.println(tx);
-			String tname=tx.split("\n")[0];//第一个的位置为队名
+			String tname=tx.split("\r\n")[0];//第一个的位置为队名
 			//System.out.println(tname);
 			teams[i-1]=new Team();
 			teams[i-1].setName(tname);//获取队名

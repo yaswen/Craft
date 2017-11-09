@@ -1,11 +1,56 @@
 package com.ysw.craft.fanfou;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
+
+import com.ysw.craft.demo.txttest;
 
 public class PlayBasketball {
 
 	public static void main(String[] args) {
-		playGame(1,7);
+		//playGame(2,29);
+		doSchedule();
+	}
+	@SuppressWarnings("deprecation")
+	public static void doSchedule() {
+		
+		Date today = new Date();  
+        Calendar c = Calendar.getInstance();  
+        c.setTime(today);  
+        c.add(Calendar.DAY_OF_MONTH, 1);// 今天+1天  
+        Date tomorrow = c.getTime();  
+		int y=tomorrow.getYear()+1900;
+		int m=tomorrow.getMonth()+1;
+		int d=tomorrow.getDate();
+		System.out.println("明天是"+y+"年"+m+"月"+d+"日");
+		String txt=txttest.schedulefile();
+		String[] tx=txt.split("\r\n");
+		//System.out.println(tx[2]);
+		String[] sche=new String[30];
+		int s=0;
+		for(int i=1;i<=1230;i++) {
+			if(tx[i].split("\t")[0].equals(y+"/"+m+"/"+d)) {
+				sche[s]=tx[i].split("\t")[6]+"vs"+tx[i].split("\t")[7];
+				s++;
+			}
+		}
+		for(int i=0;i<30;i++) {
+			if(null!=sche[i]) {
+				//System.out.println("比赛"+sche[i]);
+				int ke=Integer.parseInt(sche[i].split("vs")[0]);
+				int zhu=Integer.parseInt(sche[i].split("vs")[1]);
+				playGame(ke,zhu);
+				try {
+					Thread.sleep(3000);//==========间隔几秒钟运行下一场比赛
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
 	}
 	
 	/**
@@ -22,8 +67,7 @@ public class PlayBasketball {
 		int[][] lineupa=Teams.lineup;//获得阵容，待会儿需要用这个记录每个球员得分
 		int[][] lineupb=Teams.lineup;//获得阵容，待会儿需要用这个记录每个球员得分
 		
-		String[] fanfou=new String[5];//要发的饭否，四节各一条，最终总结一条。
-		
+		String[] fanfou={"第一节","第二节","第三节","第四节","本场比赛"};//要发的饭否，四节各一条，最终总结一条。
 		Team tma=Team.getTeam()[teama];
 		Team tmb=Team.getTeam()[teamb];
 		
@@ -34,6 +78,7 @@ public class PlayBasketball {
 			if(ts==ss&&i==13) {
 				i--;
 				ot+=1;
+				fanfou[4]+="第四节结束双方战平，进入加时。";
 			}
 			Teams a=Teams.getTeams(teama, i);
 			Teams b=Teams.getTeams(teamb, i);
@@ -50,7 +95,7 @@ public class PlayBasketball {
 			int t=0;
 			for(int ia=0;ia<5;ia++) {
 				int si=atk(aa[ia],ap[ia],bd[ia]);//单个球员得分
-				System.out.print(aname[ia]+"得分"+si+"\t");
+				//System.out.print(aname[ia]+"得分"+si+"\t");
 				t+=si;
 				ascore[lineupa[i-1][ia]]+=si;//记录球员数据统计
 				aquarterScore[(i-1)/3][lineupa[i-1][ia]]+=si;
@@ -58,7 +103,7 @@ public class PlayBasketball {
 			int s=0;
 			for(int ib=0;ib<5;ib++) {
 				int si=atk(ba[ib],bp[ib],ad[ib]);//单个球员得分
-				System.out.print(bname[ib]+"得分"+si+"\t");
+				//System.out.print(bname[ib]+"得分"+si+"\t");
 				s+=si;
 				bscore[lineupb[i-1][ib]]+=si;//记录球员数据统计
 				bquarterScore[(i-1)/3][lineupb[i-1][ib]]+=si;
@@ -66,21 +111,22 @@ public class PlayBasketball {
 			/*======以上为小节内双方五人得分数据计算---以下为小节关联大节事项======*/
 			aquarter[(i-1)/3]+=t;
 			bquarter[(i-1)/3]+=s;
-			System.out.println(t+"\t"+s);
+			//System.out.println(t+"\t"+s);
 			/*============以下为大节事项============*/
 			
 			
 			if(i%3==0&&ot==0) {
-				System.out.println("第"+(i/3)+"节的比分为："+aquarter[(i-1)/3]+"比"+bquarter[(i-1)/3]+"。");
+				fanfou[4]+="第"+(i/3)+"节的比分为："+aquarter[(i-1)/3]+"比"+bquarter[(i-1)/3]+"。";
+				//System.out.println("第"+(i/3)+"节的比分为："+aquarter[(i-1)/3]+"比"+bquarter[(i-1)/3]+"。");
 			}else if(i==12) {
 				/*======以下为加时赛事项======*/
-				System.out.println("第"+ot+"加时的比分为："+t+"比"+s+"。");
+				//System.out.println("第"+ot+"加时的比分为："+t+"比"+s+"。");
 			}
 			/*======以上为大节事项---以下为小节关联整场比赛事项======*/
 			ts+=t;
 			ss+=s;
 		}
-		System.out.println("最终比分为："+ts+"比"+ss+"！四节比分分别为："
+		System.out.println(tma.getName()+"对"+tmb.getName()+"的比赛最终比分为："+ts+"比"+ss+"！四节比分分别为："
 				+aquarter[0]+"-"+bquarter[0]+"，"
 				+aquarter[1]+"-"+bquarter[1]+"，"
 				+aquarter[2]+"-"+bquarter[2]+"，"
@@ -88,6 +134,7 @@ public class PlayBasketball {
 		/**
 		 * 输出双方球员总得分
 		 */
+		/*
 		for(int ip=0;ip<10;ip++) {
 			System.out.print(tma.players[ip].getName()+"总得分" +ascore[ip]+"\t");
 			if(ip==4) {
@@ -120,6 +167,9 @@ public class PlayBasketball {
 				System.out.println();
 			}
 		}
+		*/
+		//System.out.println(fanfou[4]);
+		//Status.UpdateStatus(fanfou[4]);
 	}
 	
 	/*

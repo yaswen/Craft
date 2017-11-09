@@ -34,4 +34,8 @@ public class txttest {
     	File file = new File("WebContent/pages/1.txt");
     	return txt2String(file);
     }
+    public static String schedulefile() {
+    	File file = new File("WebContent/playbasketball/2.txt");
+    	return txt2String(file);
+    }
 }
