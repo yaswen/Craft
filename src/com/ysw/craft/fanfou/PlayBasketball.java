@@ -19,7 +19,7 @@ public class PlayBasketball {
         Calendar c = Calendar.getInstance();  
         c.setTime(today);  
         c.add(Calendar.DAY_OF_MONTH, 1);// 今天+1天  
-        Date tomorrow = c.getTime();  
+        Date tomorrow = c.getTime();
 		int y=tomorrow.getYear()+1900;
 		int m=tomorrow.getMonth()+1;
 		int d=tomorrow.getDate();
@@ -40,9 +40,11 @@ public class PlayBasketball {
 				//System.out.println("比赛"+sche[i]);
 				int ke=Integer.parseInt(sche[i].split("vs")[0]);
 				int zhu=Integer.parseInt(sche[i].split("vs")[1]);
-				playGame(ke,zhu);
+				
+				playGame(ke,zhu);//运行比赛
+				
 				try {
-					Thread.sleep(3000);//==========间隔几秒钟运行下一场比赛
+					Thread.sleep(1000);//==========间隔几秒钟运行下一场比赛
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -98,7 +100,7 @@ public class PlayBasketball {
 				//System.out.print(aname[ia]+"得分"+si+"\t");
 				t+=si;
 				ascore[lineupa[i-1][ia]]+=si;//记录球员数据统计
-				aquarterScore[(i-1)/3][lineupa[i-1][ia]]+=si;
+				aquarterScore[(i-1)/3][lineupa[i-1][ia]]+=si;//记录球员单节数据统计
 			}			
 			int s=0;
 			for(int ib=0;ib<5;ib++) {
@@ -106,8 +108,9 @@ public class PlayBasketball {
 				//System.out.print(bname[ib]+"得分"+si+"\t");
 				s+=si;
 				bscore[lineupb[i-1][ib]]+=si;//记录球员数据统计
-				bquarterScore[(i-1)/3][lineupb[i-1][ib]]+=si;
+				bquarterScore[(i-1)/3][lineupb[i-1][ib]]+=si;//记录球员单节数据统计
 			}	
+			
 			/*======以上为小节内双方五人得分数据计算---以下为小节关联大节事项======*/
 			aquarter[(i-1)/3]+=t;
 			bquarter[(i-1)/3]+=s;
@@ -117,6 +120,7 @@ public class PlayBasketball {
 			
 			if(i%3==0&&ot==0) {
 				fanfou[4]+="第"+(i/3)+"节的比分为："+aquarter[(i-1)/3]+"比"+bquarter[(i-1)/3]+"。";
+				beStatus((i/3),aquarter,bquarter,aquarterScore,bquarterScore,tma.getName(),tmb.getName(),tma.getPlayers(),tmb.getPlayers());
 				//System.out.println("第"+(i/3)+"节的比分为："+aquarter[(i-1)/3]+"比"+bquarter[(i-1)/3]+"。");
 			}else if(i==12) {
 				/*======以下为加时赛事项======*/
@@ -239,4 +243,11 @@ public class PlayBasketball {
  *
  *		上述简版体力/模拟定死轮换
  * */
+	public static String beStatus(int quarter,int[] aquarter,int[] bquarter,int[][] aquarterScore, int[][] bquarterScore,String tmaname,String tmbname,Player[] pa,Player[] pb) {
+		//beStatus((i/3),aquarter,bquarter,aquarterScore,bquarterScore,tma.getName(),tmb.getName(),tma.getPlayers(),tmb.getPlayers());
+		String s="";
+		/*以下为根据数据生成复杂精彩的话术逻辑*/
+		
+		return s;
+	}
 }
