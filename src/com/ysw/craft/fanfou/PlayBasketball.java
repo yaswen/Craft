@@ -9,7 +9,7 @@ import com.ysw.craft.demo.txttest;
 public class PlayBasketball {
 
 	public static void main(String[] args) {
-		//playGame(2,29);
+		//playGame(2,0);
 		doSchedule();
 	}
 	@SuppressWarnings("deprecation")
@@ -119,11 +119,12 @@ public class PlayBasketball {
 			
 			
 			if(i%3==0&&ot==0) {
-				fanfou[4]+="第"+(i/3)+"节的比分为："+aquarter[(i-1)/3]+"比"+bquarter[(i-1)/3]+"。";
-				beStatus((i/3),aquarter,bquarter,aquarterScore,bquarterScore,tma.getName(),tmb.getName(),tma.getPlayers(),tmb.getPlayers());
+				//fanfou[4]+="第"+(i/3)+"节的比分为："+aquarter[(i-1)/3]+"比"+bquarter[(i-1)/3]+"。";
+				fanfou[(i-1)/3]=beStatus((i/3),aquarter,bquarter,aquarterScore,bquarterScore,tma.getName(),tmb.getName(),tma.getPlayers(),tmb.getPlayers());
 				//System.out.println("第"+(i/3)+"节的比分为："+aquarter[(i-1)/3]+"比"+bquarter[(i-1)/3]+"。");
 			}else if(i==12) {
 				/*======以下为加时赛事项======*/
+				fanfou[(i-1)/3]=beStatus(ot+4,aquarter,bquarter,aquarterScore,bquarterScore,tma.getName(),tmb.getName(),tma.getPlayers(),tmb.getPlayers());
 				//System.out.println("第"+ot+"加时的比分为："+t+"比"+s+"。");
 			}
 			/*======以上为大节事项---以下为小节关联整场比赛事项======*/
@@ -135,6 +136,9 @@ public class PlayBasketball {
 				+aquarter[1]+"-"+bquarter[1]+"，"
 				+aquarter[2]+"-"+bquarter[2]+"，"
 				+aquarter[3]+"-"+bquarter[3]+"，");
+		for(int f=0;f<5;f++) {
+			System.out.println(fanfou[f]);
+		}
 		/**
 		 * 输出双方球员总得分
 		 */
@@ -246,7 +250,70 @@ public class PlayBasketball {
 	public static String beStatus(int quarter,int[] aquarter,int[] bquarter,int[][] aquarterScore, int[][] bquarterScore,String tmaname,String tmbname,Player[] pa,Player[] pb) {
 		//beStatus((i/3),aquarter,bquarter,aquarterScore,bquarterScore,tma.getName(),tmb.getName(),tma.getPlayers(),tmb.getPlayers());
 		String s="";
+		String s2="";
+		
 		/*以下为根据数据生成复杂精彩的话术逻辑*/
+		switch(quarter) {
+		case 1:
+			s+="第一节";break;
+		case 2:
+			s+="第二节";break;
+		case 3:
+			s+="第三节";break;
+		case 4:
+			s+="第四节";break;
+		default:
+			s+="第"+(quarter-4)+"加时";break;//quarter>4时表示是加时了。5就变成第1加时，以此类推
+		}
+		quarter-=1;
+		int high=0;//高分方，
+		for(int i=0;i<10;i++) {
+			//判断单节高分
+			if(aquarterScore[quarter][i]>12) {
+				s+="，"+pa[i].getName()+"单节得到"+aquarterScore[quarter][i]+"分";
+				high+=1;
+			}
+			if(bquarterScore[quarter][i]>12) {
+				s+="，"+pb[i].getName()+"单节得到"+bquarterScore[quarter][i]+"分";
+				high+=10;
+			}
+			//判断累积高分
+			if(quarter==1||quarter==2) {
+				int higha=0;
+				int highb=0;
+				for(int j=0;j<=quarter;j++) {
+					higha+=aquarterScore[j][i];
+					highb+=bquarterScore[j][i];
+				}
+				if(higha>=(quarter*16+8)) {
+					s2+="，目前"+pa[i].getName()+"已经得到"+higha+"分";
+				}
+				if(highb>=(quarter*16+8)) {
+					s2+="，目前"+pb[i].getName()+"已经得到"+highb+"分";
+				}
+			}
+		}
+		int ab=aquarter[quarter]-bquarter[quarter];
+		if(ab>14) {
+			s+=(high>0&&high<10)?"，带领":((high>10&&high%10==0)?"，但是":"，");
+			if(aquarter[quarter]>42) {
+				s+=tmaname+"打出了进攻高潮，单节打出"+aquarter[quarter]+"比"+bquarter[quarter]+"的比分";
+			}else if(bquarter[quarter]<16) {
+				s+=tmaname+"打出了窒息防守，单节打出"+aquarter[quarter]+"比"+bquarter[quarter]+"的比分";
+			}else {
+				s+=tmaname+"单节打出"+aquarter[quarter]+"比"+bquarter[quarter]+"的比分";
+			}
+		}
+		if(ab<-14) {
+			s+=(high>0&&high<10)?"，但是":((high>10&&high%10==0)?"，带领":"，");
+			if(bquarter[quarter]>42) {
+				s+=tmbname+"打出了进攻高潮，单节打出"+bquarter[quarter]+"比"+aquarter[quarter]+"的比分";
+			}else if(aquarter[quarter]<16) {
+				s+=tmbname+"打出了窒息防守，单节打出"+bquarter[quarter]+"比"+aquarter[quarter]+"的比分";
+			}else {
+				s+=tmbname+"单节打出"+bquarter[quarter]+"比"+aquarter[quarter]+"的比分";
+			}
+		}
 		
 		return s;
 	}
