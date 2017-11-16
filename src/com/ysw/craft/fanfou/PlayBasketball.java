@@ -9,7 +9,7 @@ import com.ysw.craft.demo.txttest;
 public class PlayBasketball {
 
 	public static void main(String[] args) {
-		//playGame(2,0);
+		playGame(2,0);
 		doSchedule();
 	}
 	@SuppressWarnings("deprecation")
@@ -46,7 +46,7 @@ public class PlayBasketball {
 				try {
 					Thread.sleep(1000);//==========间隔几秒钟运行下一场比赛
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
+					//
 					e.printStackTrace();
 				}
 			}
@@ -84,8 +84,8 @@ public class PlayBasketball {
 			}
 			Teams a=Teams.getTeams(teama, i);
 			Teams b=Teams.getTeams(teamb, i);
-			String aname[]= a.getName();
-			String bname[]= b.getName();
+//			String aname[]= a.getName();
+//			String bname[]= b.getName();
 			int aa[]= a.getA();//A队基础攻击
 			int ap[]= a.getP();//A队转换攻击
 			int ad[]= a.getD();//A队防守
@@ -120,11 +120,11 @@ public class PlayBasketball {
 			
 			if(i%3==0&&ot==0) {
 				//fanfou[4]+="第"+(i/3)+"节的比分为："+aquarter[(i-1)/3]+"比"+bquarter[(i-1)/3]+"。";
-				fanfou[(i-1)/3]=beStatus((i/3),aquarter,bquarter,aquarterScore,bquarterScore,tma.getName(),tmb.getName(),tma.getPlayers(),tmb.getPlayers());
+				fanfou[(i-1)/3]=beStatus((i/3),aquarter,bquarter,aquarterScore,bquarterScore,tma.getName(),tmb.getName(),tma.getPlayers(),tmb.getPlayers(),t,s);
 				//System.out.println("第"+(i/3)+"节的比分为："+aquarter[(i-1)/3]+"比"+bquarter[(i-1)/3]+"。");
 			}else if(i==12) {
 				/*======以下为加时赛事项======*/
-				fanfou[(i-1)/3]=beStatus(ot+4,aquarter,bquarter,aquarterScore,bquarterScore,tma.getName(),tmb.getName(),tma.getPlayers(),tmb.getPlayers());
+				fanfou[(i-1)/3]=beStatus(ot+4,aquarter,bquarter,aquarterScore,bquarterScore,tma.getName(),tmb.getName(),tma.getPlayers(),tmb.getPlayers(),t,s);
 				//System.out.println("第"+ot+"加时的比分为："+t+"比"+s+"。");
 			}
 			/*======以上为大节事项---以下为小节关联整场比赛事项======*/
@@ -247,11 +247,11 @@ public class PlayBasketball {
  *
  *		上述简版体力/模拟定死轮换
  * */
-	public static String beStatus(int quarter,int[] aquarter,int[] bquarter,int[][] aquarterScore, int[][] bquarterScore,String tmaname,String tmbname,Player[] pa,Player[] pb) {
+	public static String beStatus(int quarter,int[] aquarter,int[] bquarter,int[][] aquarterScore, int[][] bquarterScore,String tmaname,String tmbname,Player[] pa,Player[] pb,int ta,int sb) {
 		//beStatus((i/3),aquarter,bquarter,aquarterScore,bquarterScore,tma.getName(),tmb.getName(),tma.getPlayers(),tmb.getPlayers());
 		String s="";
 		String s2="";
-		
+		int ot=0;
 		/*以下为根据数据生成复杂精彩的话术逻辑*/
 		switch(quarter) {
 		case 1:
@@ -263,12 +263,24 @@ public class PlayBasketball {
 		case 4:
 			s+="第四节";break;
 		default:
-			s+="第"+(quarter-4)+"加时";break;//quarter>4时表示是加时了。5就变成第1加时，以此类推
+			s+="第"+(quarter-4)+"加时";//quarter>4时表示是加时了。5就变成第1加时，以此类推
+			ot+=quarter-4;
+			break;
 		}
 		quarter-=1;
 		int high=0;//高分方，
 		for(int i=0;i<10;i++) {
 			//判断单节高分
+			if(ot>0) {
+				if(ta>12) {
+					s+="，"+pa[i].getName()+"单节得到"+aquarterScore[quarter][i]+"分";
+					high+=1;
+				}
+				if(bquarterScore[quarter][i]>12) {
+					s+="，"+pb[i].getName()+"单节得到"+bquarterScore[quarter][i]+"分";
+					high+=10;
+				}
+			}
 			if(aquarterScore[quarter][i]>12) {
 				s+="，"+pa[i].getName()+"单节得到"+aquarterScore[quarter][i]+"分";
 				high+=1;
