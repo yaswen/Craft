@@ -62,6 +62,8 @@ public class PlayBasketball {
 	public static void playGame(int teama,int teamb){
 		int ts=0,ss=0;
 		int aquarter[]= {0,0,0,0};int bquarter[]= {0,0,0,0};
+		int[] aot=new int[6];int[] bot=new int[6];//每个加时的得分
+		int[][] aotScore=new int[6][10];int[][] botScore=new int[6][10];
 		int ascore[] = {0,0,0,0,0,0,0,0,0,0};int bscore[]= {0,0,0,0,0,0,0,0,0,0};//双方每个球员得分
 		int aquarterScore[][]= {{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0}};//双方每个球员单节得分
 		int bquarterScore[][]= {{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0}};
@@ -73,35 +75,38 @@ public class PlayBasketball {
 		Team tma=Team.getTeam()[teama];
 		Team tmb=Team.getTeam()[teamb];
 		
+		int ot=0;//加时数
 		/*======以上为整场比赛初始化---以下为12小节循环======*/
-		
 		for(int i = 1 ; i <= 12 || ts==ss ; i++) {
-			int ot=0;//加时数
-			if(ts==ss&&i==13) {
+			if(ts==ss&&i>=13) {
+				ot+=1;
+			}
+			//int ot=0;//加时数		//这里是之前处理加时的方式，比较草率
+			/*if(ts==ss&&i==13) {	//这里是之前处理加时的方式，比较草率
 				i--;
 				ot+=1;
 				fanfou[4]+="第四节结束双方战平，进入加时。";
-			}
+			}*/
 			Teams a=Teams.getTeams(teama, i);
 			Teams b=Teams.getTeams(teamb, i);
-//			String aname[]= a.getName();
-//			String bname[]= b.getName();
+			String aname[]= a.getName();
+			String bname[]= b.getName();
 			int aa[]= a.getA();//A队基础攻击
 			int ap[]= a.getP();//A队转换攻击
 			int ad[]= a.getD();//A队防守
 			int ba[]= b.getA();//B队基础攻击
 			int bp[]= b.getP();//B队转换攻击
 			int bd[]= b.getD();//B队防守
-			
+
 			/*======以上为小节内双方数据初始化---以下为小节内双方五人得分计算======*/
-			int t=0;
+			int t=0;// TODO 改成以ot判断为加时，另行处理，计分放进aot、bot、aotScore和botScore的形式。这几个数组不需初始化，只要ot=几，aot[几]就必然有值
 			for(int ia=0;ia<5;ia++) {
 				int si=atk(aa[ia],ap[ia],bd[ia]);//单个球员得分
 				//System.out.print(aname[ia]+"得分"+si+"\t");
 				t+=si;
 				ascore[lineupa[i-1][ia]]+=si;//记录球员数据统计
 				aquarterScore[(i-1)/3][lineupa[i-1][ia]]+=si;//记录球员单节数据统计
-			}			
+			}
 			int s=0;
 			for(int ib=0;ib<5;ib++) {
 				int si=atk(ba[ib],bp[ib],ad[ib]);//单个球员得分
@@ -109,22 +114,21 @@ public class PlayBasketball {
 				s+=si;
 				bscore[lineupb[i-1][ib]]+=si;//记录球员数据统计
 				bquarterScore[(i-1)/3][lineupb[i-1][ib]]+=si;//记录球员单节数据统计
-			}	
-			
+			}
+
 			/*======以上为小节内双方五人得分数据计算---以下为小节关联大节事项======*/
 			aquarter[(i-1)/3]+=t;
 			bquarter[(i-1)/3]+=s;
 			//System.out.println(t+"\t"+s);
 			/*============以下为大节事项============*/
-			
-			
+
 			if(i%3==0&&ot==0) {
 				//fanfou[4]+="第"+(i/3)+"节的比分为："+aquarter[(i-1)/3]+"比"+bquarter[(i-1)/3]+"。";
 				fanfou[(i-1)/3]=beStatus((i/3),aquarter,bquarter,aquarterScore,bquarterScore,tma.getName(),tmb.getName(),tma.getPlayers(),tmb.getPlayers(),t,s);
 				//System.out.println("第"+(i/3)+"节的比分为："+aquarter[(i-1)/3]+"比"+bquarter[(i-1)/3]+"。");
-			}else if(i==12) {
+			}else if(i>=12) {
 				/*======以下为加时赛事项======*/
-				fanfou[(i-1)/3]=beStatus(ot+4,aquarter,bquarter,aquarterScore,bquarterScore,tma.getName(),tmb.getName(),tma.getPlayers(),tmb.getPlayers(),t,s);
+				fanfou[3]+=beStatus(ot+4,aquarter,bquarter,aquarterScore,bquarterScore,tma.getName(),tmb.getName(),tma.getPlayers(),tmb.getPlayers(),t,s);
 				//System.out.println("第"+ot+"加时的比分为："+t+"比"+s+"。");
 			}
 			/*======以上为大节事项---以下为小节关联整场比赛事项======*/
@@ -179,7 +183,7 @@ public class PlayBasketball {
 		//System.out.println(fanfou[4]);
 		//Status.UpdateStatus(fanfou[4]);
 	}
-	
+
 	/*
 	public static int score(int a[],int p[],int db[],String aname[]) {
 		int s=0;
@@ -326,7 +330,7 @@ public class PlayBasketball {
 				s+=tmbname+"单节打出"+bquarter[quarter]+"比"+aquarter[quarter]+"的比分";
 			}
 		}
-		
+
 		return s;
 	}
 }
