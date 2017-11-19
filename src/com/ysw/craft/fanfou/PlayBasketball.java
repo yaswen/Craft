@@ -9,8 +9,8 @@ import com.ysw.craft.demo.txttest;
 public class PlayBasketball {
 
 	public static void main(String[] args) {
-		playGame(2,0);
-		doSchedule();
+		playGame(1,0);
+		//doSchedule();
 	}
 	@SuppressWarnings("deprecation")
 	public static void doSchedule() {
@@ -87,8 +87,8 @@ public class PlayBasketball {
 				ot+=1;
 				fanfou[4]+="第四节结束双方战平，进入加时。";
 			}*/
-			Teams a=Teams.getTeams(teama, i);
-			Teams b=Teams.getTeams(teamb, i);
+			Teams a=Teams.getTeams(teama, ot==0?i:11);//如果ot不为0说明进加时，保持最后一小节阵容
+			Teams b=Teams.getTeams(teamb, ot==0?i:11);
 			String aname[]= a.getName();
 			String bname[]= b.getName();
 			int aa[]= a.getA();//A队基础攻击
@@ -99,37 +99,54 @@ public class PlayBasketball {
 			int bd[]= b.getD();//B队防守
 
 			/*======以上为小节内双方数据初始化---以下为小节内双方五人得分计算======*/
-			int t=0;// TODO 改成以ot判断为加时，另行处理，计分放进aot、bot、aotScore和botScore的形式。这几个数组不需初始化，只要ot=几，aot[几]就必然有值
+			// 
+			aot[ot]=0;bot[ot]=0;
+			int t=0;
 			for(int ia=0;ia<5;ia++) {
-				int si=atk(aa[ia],ap[ia],bd[ia]);//单个球员得分
-				//System.out.print(aname[ia]+"得分"+si+"\t");
-				t+=si;
-				ascore[lineupa[i-1][ia]]+=si;//记录球员数据统计
-				aquarterScore[(i-1)/3][lineupa[i-1][ia]]+=si;//记录球员单节数据统计
+				int si=atk1(aa[ia],ap[ia],bd[ia]);//单个球员得分
+				System.out.print(aname[ia]+"得分"+si+"\t");
+				if(ot==0) {
+					t+=si;//单节球队比分
+					ascore[lineupa[i-1][ia]]+=si;//记录球员数据统计
+					aquarterScore[(i-1)/3][lineupa[i-1][ia]]+=si;//记录球员单节数据统计
+				}else {
+					aot[ot]+=si;//单节球队比分
+					ascore[lineupa[11][ia]]+=si;//记录球员数据统计
+					aotScore[ot][ia]=si;//记录单个球员单节数据统计
+				}
 			}
 			int s=0;
 			for(int ib=0;ib<5;ib++) {
-				int si=atk(ba[ib],bp[ib],ad[ib]);//单个球员得分
-				//System.out.print(bname[ib]+"得分"+si+"\t");
-				s+=si;
-				bscore[lineupb[i-1][ib]]+=si;//记录球员数据统计
-				bquarterScore[(i-1)/3][lineupb[i-1][ib]]+=si;//记录球员单节数据统计
+				int si=atk1(ba[ib],bp[ib],ad[ib]);//单个球员得分
+				System.out.print(bname[ib]+"得分"+si+"\t");
+				if(ot==0) {
+					s+=si;//单节球队比分
+					bscore[lineupb[i-1][ib]]+=si;//记录球员数据统计
+					bquarterScore[(i-1)/3][lineupb[i-1][ib]]+=si;//记录球员单节数据统计
+				}else {
+					bot[ot]+=si;//单节球队比分
+					bscore[lineupb[11][ib]]+=si;//记录球员数据统计
+					botScore[ot][ib]=si;//记录单个球员单节数据统计
+				
+				}
 			}
 
 			/*======以上为小节内双方五人得分数据计算---以下为小节关联大节事项======*/
-			aquarter[(i-1)/3]+=t;
-			bquarter[(i-1)/3]+=s;
-			//System.out.println(t+"\t"+s);
+			if(ot==0) {
+				aquarter[(i-1)/3]+=t;
+				bquarter[(i-1)/3]+=s;
+			}
+			System.out.println(t+"\t"+s);
 			/*============以下为大节事项============*/
 
 			if(i%3==0&&ot==0) {
 				//fanfou[4]+="第"+(i/3)+"节的比分为："+aquarter[(i-1)/3]+"比"+bquarter[(i-1)/3]+"。";
 				fanfou[(i-1)/3]=beStatus((i/3),aquarter,bquarter,aquarterScore,bquarterScore,tma.getName(),tmb.getName(),tma.getPlayers(),tmb.getPlayers(),t,s);
-				//System.out.println("第"+(i/3)+"节的比分为："+aquarter[(i-1)/3]+"比"+bquarter[(i-1)/3]+"。");
+				System.out.println("第"+(i/3)+"节的比分为："+aquarter[(i-1)/3]+"比"+bquarter[(i-1)/3]+"。");
 			}else if(i>=12) {
 				/*======以下为加时赛事项======*/
-				fanfou[3]+=beStatus(ot+4,aquarter,bquarter,aquarterScore,bquarterScore,tma.getName(),tmb.getName(),tma.getPlayers(),tmb.getPlayers(),t,s);
-				//System.out.println("第"+ot+"加时的比分为："+t+"比"+s+"。");
+				fanfou[3]+=otbeStatus(ot,aot,bot,aotScore,botScore);
+				System.out.println("第"+ot+"加时的比分为："+t+"比"+s+"。");
 			}
 			/*======以上为大节事项---以下为小节关联整场比赛事项======*/
 			ts+=t;
@@ -146,7 +163,7 @@ public class PlayBasketball {
 		/**
 		 * 输出双方球员总得分
 		 */
-		/*
+		
 		for(int ip=0;ip<10;ip++) {
 			System.out.print(tma.players[ip].getName()+"总得分" +ascore[ip]+"\t");
 			if(ip==4) {
@@ -179,7 +196,7 @@ public class PlayBasketball {
 				System.out.println();
 			}
 		}
-		*/
+		
 		//System.out.println(fanfou[4]);
 		//Status.UpdateStatus(fanfou[4]);
 	}
@@ -211,9 +228,17 @@ public class PlayBasketball {
 		s+=(pp<0?-pp:pp);
 		int dd=r.nextInt()%(d+4);
 		s-=(dd<0?0:dd);
-		
 		//System.out.print("得分"+(s<0?0:s)+"\t");
 		return s<0?0:s;
+	}
+	public static int atk1(int a,int p,int d) {
+		Random r=new Random();
+		int s=0;
+		int pp=r.nextInt()%100;
+		s=pp==0?0:3;
+		return s;//测试用的
+		
+		
 	}
 /*
  *	比赛分四节，每节分三个小节，基本上篮球比赛一节12分钟时间分为三个4分钟的小段很常见。
@@ -331,6 +356,11 @@ public class PlayBasketball {
 			}
 		}
 
+		return s;
+	}
+	public static String otbeStatus(int ot,int[] aot,int[] bot,int[][] aotScore,int[][] botScore){
+		String s="第"+ot+"加时";
+		//加时赛不存在反超等分差问题，不会出现单节高分的情况，只需要播报赢球方最高分的球员即可
 		return s;
 	}
 }
