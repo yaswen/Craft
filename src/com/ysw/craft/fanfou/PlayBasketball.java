@@ -9,7 +9,7 @@ import com.ysw.craft.demo.txttest;
 public class PlayBasketball {
 
 	public static void main(String[] args) {
-		playGame(1,0);
+		playGame(28,0);
 		//doSchedule();
 	}
 	@SuppressWarnings("deprecation")
@@ -112,13 +112,14 @@ public class PlayBasketball {
 				}else {
 					aot[ot]+=si;//单节球队比分
 					ascore[lineupa[11][ia]]+=si;//记录球员数据统计
-					aotScore[ot][ia]=si;//记录单个球员单节数据统计
+					aotScore[ot][lineupb[11][ia]]=si;//记录单个球员单节数据统计
 				}
 			}
 			int s=0;
 			for(int ib=0;ib<5;ib++) {
-				int si=atk1(ba[ib],bp[ib],ad[ib]);//单个球员得分
-				System.out.print(bname[ib]+"得分"+si+"\t");
+				int si=atk(ba[ib],bp[ib],ad[ib]);//单个球员得分
+				
+				//System.out.print(bname[ib]+"得分"+si+"\t");
 				if(ot==0) {
 					s+=si;//单节球队比分
 					bscore[lineupb[i-1][ib]]+=si;//记录球员数据统计
@@ -126,7 +127,7 @@ public class PlayBasketball {
 				}else {
 					bot[ot]+=si;//单节球队比分
 					bscore[lineupb[11][ib]]+=si;//记录球员数据统计
-					botScore[ot][ib]=si;//记录单个球员单节数据统计
+					botScore[ot][lineupb[11][ib]]=si;//记录单个球员单节数据统计
 				
 				}
 			}
@@ -136,17 +137,17 @@ public class PlayBasketball {
 				aquarter[(i-1)/3]+=t;
 				bquarter[(i-1)/3]+=s;
 			}
-			System.out.println(t+"\t"+s);
+			//System.out.println(t+"\t"+s);
 			/*============以下为大节事项============*/
 
 			if(i%3==0&&ot==0) {
 				//fanfou[4]+="第"+(i/3)+"节的比分为："+aquarter[(i-1)/3]+"比"+bquarter[(i-1)/3]+"。";
 				fanfou[(i-1)/3]=beStatus((i/3),aquarter,bquarter,aquarterScore,bquarterScore,tma.getName(),tmb.getName(),tma.getPlayers(),tmb.getPlayers(),t,s);
-				System.out.println("第"+(i/3)+"节的比分为："+aquarter[(i-1)/3]+"比"+bquarter[(i-1)/3]+"。");
+				//System.out.println("第"+(i/3)+"节的比分为："+aquarter[(i-1)/3]+"比"+bquarter[(i-1)/3]+"。");
 			}else if(i>=12) {
 				/*======以下为加时赛事项======*/
 				fanfou[3]+=otbeStatus(ot,aot,bot,aotScore,botScore);
-				System.out.println("第"+ot+"加时的比分为："+t+"比"+s+"。");
+				//System.out.println("第"+ot+"加时的比分为："+t+"比"+s+"。");
 			}
 			/*======以上为大节事项---以下为小节关联整场比赛事项======*/
 			ts+=t;
@@ -164,7 +165,7 @@ public class PlayBasketball {
 		 * 输出双方球员总得分
 		 */
 		
-		for(int ip=0;ip<10;ip++) {
+		/*for(int ip=0;ip<10;ip++) {
 			System.out.print(tma.players[ip].getName()+"总得分" +ascore[ip]+"\t");
 			if(ip==4) {
 				System.out.println();
@@ -178,8 +179,8 @@ public class PlayBasketball {
 			}
 		}
 		System.out.println();
-		System.out.println();
-		for(int ip=0;ip<10;ip++) {
+		System.out.println();*/
+		/*for(int ip=0;ip<10;ip++) {
 			for(int jp=0;jp<4;jp++) {
 				System.out.print(tma.players[ip].getName()+"第"+(jp+1)+"节得分"+aquarterScore[jp][ip]+"\t");
 			}
@@ -195,7 +196,7 @@ public class PlayBasketball {
 			if(ip%2==1) {
 				System.out.println();
 			}
-		}
+		}*/
 		
 		//System.out.println(fanfou[4]);
 		//Status.UpdateStatus(fanfou[4]);
@@ -235,7 +236,7 @@ public class PlayBasketball {
 		Random r=new Random();
 		int s=0;
 		int pp=r.nextInt()%100;
-		s=pp==0?0:3;
+		s=(p>=5)?8:1;
 		return s;//测试用的
 		
 		
@@ -278,8 +279,7 @@ public class PlayBasketball {
  * */
 	public static String beStatus(int quarter,int[] aquarter,int[] bquarter,int[][] aquarterScore, int[][] bquarterScore,String tmaname,String tmbname,Player[] pa,Player[] pb,int ta,int sb) {
 		//beStatus((i/3),aquarter,bquarter,aquarterScore,bquarterScore,tma.getName(),tmb.getName(),tma.getPlayers(),tmb.getPlayers());
-		String s="";
-		String s2="";
+		String s="";String s1="";String s2="";//三段播报
 		int ot=0;
 		/*以下为根据数据生成复杂精彩的话术逻辑*/
 		switch(quarter) {
@@ -355,12 +355,44 @@ public class PlayBasketball {
 				s+=tmbname+"单节打出"+bquarter[quarter]+"比"+aquarter[quarter]+"的比分";
 			}
 		}
-
-		return s;
+		if(quarter==1||quarter==2) {
+			int as=aquarter[0]+aquarter[1]+(quarter==2?aquarter[2]:0);
+			int bs=bquarter[0]+bquarter[1]+(quarter==2?bquarter[2]:0);//计算目前得分
+			int as0=aquarter[0]+(quarter==2?aquarter[1]:0);//计算之前得分
+			int bs0=bquarter[0]+(quarter==2?bquarter[1]:0);//计算目前得分
+			if(quarter==1) {s1+="半场结束，";}else {s1+="三节结束";}
+			if(as>bs) {
+				if(bs0-as0>5) {
+					s1+=tmaname+"以"+as+"比"+bs+"逆转比分";
+				}else if(as0-bs0>13){
+					s1+=tmaname+"以"+as+"比"+bs+"继续领先";
+				}else {
+					s1+=tmaname+"以"+as+"比"+bs+"暂时领先"+tmbname;
+				}
+			}else if(bs>as) {
+				if(as0-bs0>5) {
+					s1+=tmbname+"以"+bs+"比"+as+"逆转比分";
+				}else if(bs0-as0>13){
+					s1+=tmbname+"以"+bs+"比"+as+"继续领先";
+				}else {
+					s1+=tmbname+"以"+bs+"比"+as+"暂时领先"+tmaname;
+				}
+			}
+		}
+		return s+s1+s2;
 	}
 	public static String otbeStatus(int ot,int[] aot,int[] bot,int[][] aotScore,int[][] botScore){
 		String s="第"+ot+"加时";
 		//加时赛不存在反超等分差问题，不会出现单节高分的情况，只需要播报赢球方最高分的球员即可
+		ot--;
+		if(aot[ot]==bot[ot]) {
+			s+="双方各得"+aot[ot]+"分，比赛进入第"+(ot+2)+"加时";
+		}else {
+			if(aot[ot]>bot[ot]) {//TODO 写加时代码
+			for(int io=0;io<10;io+=) {
+			}
+			}
+		}
 		return s;
 	}
 }
