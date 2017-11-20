@@ -104,9 +104,9 @@ public class PlayBasketball {
 			int t=0;
 			for(int ia=0;ia<5;ia++) {
 				int si=atk(aa[ia],ap[ia],bd[ia]);//单个球员得分
-				if(ot>1) {
-					si=3;
-				}
+				/*if(ot>1) {
+					si=atk(aa[ia],ap[ia],bd[ia]);
+				}*/
 				System.out.print(aname[ia]+"得分"+si+"\t");
 				if(ot==0) {
 					t+=si;//单节球队比分
@@ -116,7 +116,7 @@ public class PlayBasketball {
 					aot[ot-1]+=si;//单节球队比分
 					ascore[lineupa[11][ia]]+=si;//记录球员数据统计
 					aotScore[ot-1][lineupb[11][ia]]=si;//记录单个球员单节数据统计
-					t=si;
+					t+=si;
 				}
 			}
 			int s=0;
@@ -132,7 +132,7 @@ public class PlayBasketball {
 					bot[ot-1]+=si;//单节球队比分
 					bscore[lineupb[11][ib]]+=si;//记录球员数据统计
 					botScore[ot-1][lineupb[11][ib]]=si;//记录单个球员单节数据统计
-					s=si;
+					s+=si;
 				}
 			}
 
@@ -406,9 +406,29 @@ public class PlayBasketball {
 			int bs1=bquarter[0];//计算首节得分
 			//疯狂逆转，险些逆转，胶着险胜，大胜，小胜
 			if(as>bs) {
-				
+				if(bs3-as3>20||bs2-as2>20||bs1-as1>20) {
+					s2+="，"+tmaname+"以"+as+"比"+bs+"疯狂逆转"+tmbname;
+				}else if(bs3-as3>10||bs2-as2>10||bs1-as1>10) {
+					s2+="，"+tmaname+"以"+as+"比"+bs+"逆转"+tmbname;
+				}else if(as-bs<4) {
+					s2+="，"+tmaname+"以"+as+"比"+bs+"险胜"+tmbname;
+				}else if(as-bs>17) {
+					s2+="，"+tmaname+"以"+as+"比"+bs+"大胜"+tmbname;
+				}else {
+					s2+="，"+tmaname+"以"+as+"比"+bs+"战胜"+tmbname;
+				}
 			}else if(bs>as) {
-				
+				if(as3-bs3>20||as2-bs2>20||as1-bs1>20) {
+					s2+="，"+tmbname+"以"+bs+"比"+as+"疯狂逆转"+tmaname;
+				}else if(as3-bs3>10||as2-bs2>10||as1-bs1>10) {
+					s2+="，"+tmbname+"以"+bs+"比"+as+"逆转"+tmaname;
+				}else if(bs-as<4) {
+					s2+="，"+tmbname+"以"+bs+"比"+as+"险胜"+tmaname;
+				}else if(bs-as>17) {
+					s2+="，"+tmbname+"以"+bs+"比"+as+"大胜"+tmaname;
+				}else {
+					s2+="，"+tmbname+"以"+bs+"比"+as+"战胜"+tmaname;
+				}
 			}else {
 				s2+="常规时间结束，双方站成"+as+"平，双方进入加时";
 			}
