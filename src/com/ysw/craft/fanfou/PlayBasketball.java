@@ -9,8 +9,8 @@ import com.ysw.craft.demo.txttest;
 public class PlayBasketball {
 
 	public static void main(String[] args) {
-		playGame(3,0);
-		//doSchedule();
+		//playGame(3,0);
+		doSchedule();
 	}
 	@SuppressWarnings("deprecation")
 	public static void doSchedule() {
@@ -157,6 +157,8 @@ public class PlayBasketball {
 			ts+=t;
 			ss+=s;
 		}
+		fanfou[4]+=statbeStatus(ascore,bscore,tma.getPlayers(),tmb.getPlayers(),tma.getName(),tmb.getName());
+		System.out.println();
 		System.out.println(tma.getName()+"对"+tmb.getName()+"的比赛最终比分为："+ts+"比"+ss+"！四节比分分别为："
 				+aquarter[0]+"-"+bquarter[0]+"，"
 				+aquarter[1]+"-"+bquarter[1]+"，"
@@ -366,7 +368,7 @@ public class PlayBasketball {
 				bc=1;
 			}
 		}
-		if(quarter==1||quarter==2) {//系第二节第三节；TODO 补充第一节和第四节
+		if(quarter==1||quarter==2) {//系第二节第三节；TODO1 补充第一节和第四节
 			int as=aquarter[0]+aquarter[1]+(quarter==2?aquarter[2]:0);
 			int bs=bquarter[0]+bquarter[1]+(quarter==2?bquarter[2]:0);//计算目前得分
 			int as0=aquarter[0]+(quarter==2?aquarter[1]:0);//计算之前得分
@@ -460,6 +462,32 @@ public class PlayBasketball {
 				s+=pb[max].getName()+"得到"+botScore[ot][max]+"分，带领"+tmbname+"以"+(sb+bot[ot])+"比"+(ta+aot[ot])+"拿下比赛";
 			}
 		}
+		return s;
+	}
+	public static String statbeStatus(int[] ascore,int[] bscore,Player[] pa,Player[] pb,String tmaname,String tmbname) {
+		String s="";
+		int max1=ascore[0]>ascore[1]?0:1;
+		int max2=max1==0?1:0;
+		for(int i=2;i<10;i++) {
+			if(ascore[max1]>=ascore[i]&&ascore[i]>ascore[max2]) {
+				max2=i;
+			}else if(ascore[i]>ascore[max1]){
+				max2=max1;
+				max1=i;
+			}
+		}
+		s+=tmaname+"队"+pa[max1].getName()+"得到"+ascore[max1]+"分，"+pa[max2].getName()+"得到"+ascore[max2]+"分。";
+		max1=bscore[0]>bscore[1]?0:1;
+		max2=max1==0?1:0;
+		for(int i=2;i<10;i++) {
+			if(bscore[max1]>=bscore[i]&&bscore[i]>bscore[max2]) {
+				max2=i;
+			}else if(bscore[i]>bscore[max1]){
+				max2=max1;
+				max1=i;
+			}
+		}
+		s+=tmbname+"队"+pb[max1].getName()+"得到"+bscore[max1]+"分，"+pb[max2].getName()+"得到"+bscore[max2]+"分。";	
 		return s;
 	}
 }
