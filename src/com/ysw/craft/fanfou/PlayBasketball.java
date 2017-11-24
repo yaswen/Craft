@@ -107,7 +107,7 @@ public class PlayBasketball {
 				/*if(ot>1) {
 					si=atk(aa[ia],ap[ia],bd[ia]);
 				}*/
-				System.out.print(aname[ia]+"得分"+si+"\t");
+				//System.out.print(aname[ia]+"得分"+si+"\t");
 				if(ot==0) {
 					t+=si;//单节球队比分
 					ascore[lineupa[i-1][ia]]+=si;//记录球员数据统计
@@ -165,8 +165,19 @@ public class PlayBasketball {
 				+aquarter[2]+"-"+bquarter[2]+"，"
 				+aquarter[3]+"-"+bquarter[3]+"，");
 		for(int f=0;f<5;f++) {
-			System.out.println(fanfou[f]);
+			System.out.println("fanfou"+f+":"+fanfou[f]);
 		}
+		String fan=fanfou[0]+"。"+fanfou[1]+"。"+fanfou[2]+"。"+fanfou[3]+"。"+fanfou[4];
+		fan=fan.replace("第一节，双方比分","首节双方打成");
+		fan=fan.replace("第二节，双方战至半场结束", "第二节打完");
+		fan=fan.replace("第三节，三节结束","第三节结束");
+		fan=fan.replace("第四节常规时间结束","第四节仍难解难分，常规时间结束");
+		System.out.println("fan:"+fan);
+		
+		
+		
+		
+		
 		/**
 		 * 输出双方球员总得分
 		 */
@@ -432,7 +443,7 @@ public class PlayBasketball {
 					s2+="，"+tmbname+"以"+bs+"比"+as+"战胜"+tmaname;
 				}
 			}else {
-				s2+="常规时间结束，双方站成"+as+"平，双方进入加时";
+				s2+="常规时间结束，双方打成"+as+"平，双方进入加时。";
 			}
 		}
 		return s+s1+s2;
