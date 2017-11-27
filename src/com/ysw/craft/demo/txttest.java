@@ -26,16 +26,18 @@ public class txttest {
     }
     
     public static void main(String[] args){
-        File file = new File("WebContent/pages/1.txt");
+        File file = new File("/root/tomcat8.5/webapps/Craft/pages/1.txt");
         System.out.println(txt2String(file));
         
     }
     public static String basketballfile() {
-    	File file = new File("WebContent/pages/1.txt");
+    	File file = new File("/root/tomcat8.5/webapps/Craft/pages/1.txt");
+    	//File file = new File("WebContent/pages/1.txt");
     	return txt2String(file);
     }
     public static String schedulefile() {
-    	File file = new File("WebContent/playbasketball/2.txt");
+    	File file = new File("/root/tomcat8.5/webapps/Craft/playbasketball/2.txt");
+    	//File file = new File("WebContent/playbasketball/2.txt");
     	return txt2String(file);
     }
 }

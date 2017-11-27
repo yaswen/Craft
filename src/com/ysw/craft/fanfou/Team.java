@@ -61,14 +61,14 @@ public class Team {
 		for(int i=1;i<=teams.length;i++) {
 			String tx=txt.split("&")[i];//第0个舍去
 			//System.out.println(tx);
-			String tname=tx.split("\r\n")[0];//第一个的位置为队名
+			String tname=tx.split("\n")[0];//第一个的位置为队名
 			//System.out.println(tname);
 			teams[i-1]=new Team();
 			teams[i-1].setName(tname);//获取队名
 			//System.out.println(teams[i-1].name);
 			Player[] players=new Player[10];//声明Players数组
 			for(int j=1;j<=10;j++) {
-				String t=tx.split("\r\n")[j];
+				String t=tx.split("\n")[j];
 				players[j-1]=new Player();
 				players[j-1].setName(t.split(" ")[0]);//0位置为球员名
 				players[j-1].setA(Integer.valueOf(t.split(" ")[1]));//1位置为基础攻击

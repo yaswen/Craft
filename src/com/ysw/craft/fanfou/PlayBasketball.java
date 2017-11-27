@@ -10,7 +10,30 @@ public class PlayBasketball {
 
 	public static void main(String[] args) {
 		//playGame(3,0);
-		doSchedule();
+		while(true) {
+			Date today = new Date();  
+			int h=today.getHours();
+			int m=today.getMinutes();
+			//System.out.println(h+"---"+m);
+			if(h>=21&&m>=0) {
+				doSchedule();
+				try {
+					System.out.println("发完了，下班了，明天再来~");
+					Thread.sleep(23*60*60*1000);//==========等待23小时，明天再来
+				} catch (InterruptedException e) {
+					//
+					e.printStackTrace();
+				}
+			}else {
+				try {
+					System.out.println("来早了，还没到9点，再等等~");
+					Thread.sleep(5*60*1000);//=============如果还没到9点，则等待5分钟再判断一下
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			}
+		}		
 	}
 	@SuppressWarnings("deprecation")
 	public static void doSchedule() {
@@ -25,11 +48,13 @@ public class PlayBasketball {
 		int d=tomorrow.getDate();
 		System.out.println("明天是"+y+"年"+m+"月"+d+"日");
 		String txt=txttest.schedulefile();
-		String[] tx=txt.split("\r\n");
+		String[] tx=txt.split("\n");
+		//System.out.println(tx[0]);
+		//System.out.println(tx[1]);
 		//System.out.println(tx[2]);
 		String[] sche=new String[30];
 		int s=0;
-		for(int i=1;i<=1230;i++) {
+		for(int i=2;i<=1230;i++) {
 			if(tx[i].split("\t")[0].equals(y+"/"+m+"/"+d)) {
 				sche[s]=tx[i].split("\t")[6]+"vs"+tx[i].split("\t")[7];
 				s++;
@@ -44,7 +69,7 @@ public class PlayBasketball {
 				playGame(ke,zhu);//运行比赛
 				
 				try {
-					Thread.sleep(1000);//==========间隔几秒钟运行下一场比赛
+					Thread.sleep(2*60*1000);//==========间隔两分钟运行下一场比赛
 				} catch (InterruptedException e) {
 					//
 					e.printStackTrace();
@@ -172,8 +197,22 @@ public class PlayBasketball {
 		fan=fan.replace("第二节，双方战至半场结束", "第二节打完");
 		fan=fan.replace("第三节，三节结束","第三节结束");
 		fan=fan.replace("第四节常规时间结束","第四节仍难解难分，常规时间结束");
-		System.out.println("fan:"+fan);
 		
+		if(fan.length()>140) {
+			String fan1=fan.substring(0, 139);
+			String fan2=fan.substring(139);
+			Status.UpdateStatus(fan1);
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Status.UpdateStatus(fan2);
+		}else {
+			System.out.println("fan:"+fan);
+			Status.UpdateStatus(fan);
+		}
 		
 		
 		
@@ -254,9 +293,7 @@ public class PlayBasketball {
 		int s=0;
 		int pp=r.nextInt()%100;
 		s=(p>=5)?8:1;
-		return s;//测试用的
-		
-		
+		return s;//测试用的	
 	}
 /*
  *	比赛分四节，每节分三个小节，基本上篮球比赛一节12分钟时间分为三个4分钟的小段很常见。

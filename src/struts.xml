@@ -38,6 +38,9 @@
 		<action name="naming" class="com.ysw.craft.action.NamingAction">
 			<result name="success">/naming/nametext.jsp</result>
 		</action>
+		<action name="token" class="com.ysw.craft.fanfou.DoToken">
+			<result name="success">/a.jsp</result>
+		</action>
 	</package>
 	<!-- json-plugin返回json格式的一次尝试，但是未果。先注释掉放在这
 	<package name="ajaxDemo" extends="json-default" namespace="/" >
