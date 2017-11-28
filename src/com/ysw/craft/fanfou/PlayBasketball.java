@@ -18,15 +18,15 @@ public class PlayBasketball {
 			if(h>=21&&m>=0) {
 				doSchedule();
 				try {
-					System.out.println("发完了，下班了，明天再来~");
+					System.out.println("that's all,see you tomorrow~");
 					Thread.sleep(23*60*60*1000);//==========等待23小时，明天再来
 				} catch (InterruptedException e) {
-					//
 					e.printStackTrace();
+					break;
 				}
 			}else {
 				try {
-					System.out.println("来早了，还没到9点，再等等~");
+					System.out.println("Oh,it's so early,wait a minute~");
 					Thread.sleep(5*60*1000);//=============如果还没到9点，则等待5分钟再判断一下
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
@@ -47,6 +47,10 @@ public class PlayBasketball {
 		int m=tomorrow.getMonth()+1;
 		int d=tomorrow.getDate();
 		System.out.println("明天是"+y+"年"+m+"月"+d+"日");
+		String fansche0="明天是"+y+"年"+m+"月"+d+"日。NBA有";
+		int scheCount=0;
+		String fansche1="场比赛，分别是：";
+		String fansche2="一场一场来模拟：";
 		String txt=txttest.schedulefile();
 		String[] tx=txt.split("\n");
 		//System.out.println(tx[0]);
@@ -59,6 +63,23 @@ public class PlayBasketball {
 				sche[s]=tx[i].split("\t")[6]+"vs"+tx[i].split("\t")[7];
 				s++;
 			}
+		}
+		for(int i=0;i<30;i++) {
+			if(null!=sche[i]) {
+				scheCount++;
+				int ke=Integer.parseInt(sche[i].split("vs")[0]);
+				int zhu=Integer.parseInt(sche[i].split("vs")[1]);
+				String tma=Team.getTeam()[ke].getName();
+				String tmb=Team.getTeam()[zhu].getName();
+				fansche1+=tma+"vs"+tmb+"，";
+			}
+		}
+		Status.UpdateStatus(fansche0+scheCount+fansche1+fansche2);
+		try {
+			Thread.sleep(10000);//==========间隔十秒钟
+		} catch (InterruptedException e) {
+			//
+			e.printStackTrace();
 		}
 		for(int i=0;i<30;i++) {
 			if(null!=sche[i]) {
@@ -197,15 +218,18 @@ public class PlayBasketball {
 		fan=fan.replace("第二节，双方战至半场结束", "第二节打完");
 		fan=fan.replace("第三节，三节结束","第三节结束");
 		fan=fan.replace("第四节常规时间结束","第四节仍难解难分，常规时间结束");
-		
+		fan="模拟一场明天"+tma.getName()+"对"+tmb.getName()+"的比赛："+fan;
 		if(fan.length()>140) {
-			String fan1=fan.substring(0, 139);
-			String fan2=fan.substring(139);
+			String[] fand=fan.split("本场比赛");
+			String fan1=fand[0];
+			String fan2="本场比赛"+fand[1];
+			/*String fan1=fan.substring(0, 139);
+			String fan2=fan.substring(139);*/
 			Status.UpdateStatus(fan1);
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				//
 				e.printStackTrace();
 			}
 			Status.UpdateStatus(fan2);

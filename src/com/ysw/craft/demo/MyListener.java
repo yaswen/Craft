@@ -43,6 +43,6 @@ public class MyListener implements ServletContextListener {
         sc.setAttribute("dataSource", bds);  
         System.out.println("应用监听器初始化工作完成...");  
         System.out.println("已经创建DataSource...");  
-        PlayBasketball.playGame(2,0);
+        PlayBasketball.main(null);
     }  
 }  
