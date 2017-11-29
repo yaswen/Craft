@@ -15,23 +15,13 @@ public class PlayBasketball {
 			int h=today.getHours();
 			int m=today.getMinutes();
 			//System.out.println(h+"---"+m);
-			if(h>=21&&m>=0) {
+			if(h==21&&m==0) {
 				doSchedule();
 				try {
-					System.out.println("that's all,see you tomorrow~");
-					Thread.sleep(23*60*60*1000);//==========等待23小时，明天再来
+					Thread.sleep(61000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
-					break;
 				}
-			}else {
-				try {
-					System.out.println("Oh,it's so early,wait a minute~");
-					Thread.sleep(5*60*1000);//=============如果还没到9点，则等待5分钟再判断一下
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} 
 			}
 		}		
 	}
@@ -76,7 +66,7 @@ public class PlayBasketball {
 		}
 		Status.UpdateStatus(fansche0+scheCount+fansche1+fansche2);
 		try {
-			Thread.sleep(10000);//==========间隔十秒钟
+			Thread.sleep(30000);//==========间隔十秒钟
 		} catch (InterruptedException e) {
 			//
 			e.printStackTrace();
