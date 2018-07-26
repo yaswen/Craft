@@ -9,6 +9,7 @@ import com.ysw.craft.demo.txttest;
 public class PlayBasketball {
 
 	public static void main(String[] args) {
+		System.out.println("启动篮球模拟器程序!");
 		//playGame(3,0);
 		while(true) {
 			Date today = new Date();  
